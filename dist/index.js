@@ -1,7 +1,3 @@
-import fs from "fs";
-import parserXML from "./parliament-handler/xml_parser";
-import { conversation, Speech } from "./parliament-handler/prompts";
-
 /*
 const filePath = "/workspaces/PoliTopics/src/samples/sample1.txt";  // Replace with your actual file path
 
@@ -18,15 +14,11 @@ fs.readFile(filePath, "utf8", (err, data) => {
 
     const conv = conversation(parsedData.records[0].recordData.speechRecords);
 
-  
+
   }
 });
 */
-
 import generateSummery from "./gemini-handler/api";
-import * as dotenv from 'dotenv';
-dotenv.config();
-
 const conv = `以下の会話内容について、次の形式で要約してください：
 
 1. **全体の要約**：会話全体の要旨と結論を短くまとめてください。
@@ -60,11 +52,7 @@ const conv = `以下の会話内容について、次の形式で要約してく
 
 [発言4]
 **B大臣**：「中小企業支援については、補助金の拡充と税制の見直しを検討中です。」
-`
-const gemini_api_key = process.env.GEMINI_API_KEY || "";
-console.log(gemini_api_key);
-/*
-generateSummery(gemini_api_key, conv).then((res) => {
-  console.log(res);
+`;
+generateSummery(conv).then((res) => {
+    console.log(res);
 });
-*/

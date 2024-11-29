@@ -1,0 +1,12 @@
+.App {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  background-color: #f8f9fa;
+  padding: 20px;
+}
+
+.App-header h1 {
+  color: #333;
+  font-size: 48px;
+  margin-bottom: 10px;
+}

@@ -1,0 +1,15 @@
+.article-details {
+    padding: 20px;
+    text-align: left;
+  }
+  
+  .article-details h1 {
+    color: #333;
+    font-size: 32px;
+  }
+  
+  .article-details p {
+    font-size: 18px;
+    color: #666;
+  }
+  

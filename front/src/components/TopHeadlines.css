@@ -1,0 +1,127 @@
+.top-headlines {
+  padding: 20px;
+}
+
+.top-headlines h2 {
+  margin-bottom: 10px;
+}
+
+.filter-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.search-bar {
+  flex: 1;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+.date-filter {
+  padding: 5px;
+  margin-right: 10px;
+}
+
+.filter-icon {
+  font-size: 20px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.sort-button {
+  padding: 5px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.category-bar {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+
+.category-bar::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+
+.category-bar-inner {
+  display: inline-flex;
+}
+
+.category-button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: none;
+  background-color: #f1f1f1;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 5px;
+}
+
+.category-button:hover {
+  background-color: #ddd;
+}
+
+.category-button.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.headline-tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center; /* Center the tiles */
+}
+
+.headline-tile {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  width: calc(33.333% - 20px); /* Default width for larger screens */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s;
+  text-align: left; /* Ensures text is left-aligned */
+}
+
+.headline-tile:hover {
+  transform: translateY(-5px);
+}
+
+.headline-date {
+  font-size: 12px;
+  color: gray;
+  margin-bottom: 5px;
+}
+
+.headline-title {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.headline-description {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Media query for tablets */
+@media (max-width: 768px) {
+  .headline-tile {
+    width: calc(50% - 20px); /* Two tiles per row */
+  }
+}
+
+/* Media query for smartphones */
+@media (max-width: 480px) {
+  .headline-tile {
+    width: calc(100% - 20px); /* One tile per row */
+  }
+}

@@ -19,12 +19,13 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "./",  // Optional: Ensures consistent path resolution
+    "baseUrl": "src",  // Optional: Ensures consistent path resolution
     "paths": {         // Optional: For aliasing paths (e.g., "@/components")
-      "@/*": ["src/*"]
+      "@interfaces/*": ["interfaces/*"]
     }
   },
   "include": [
-    "src"
+    "src",
+    "config-overrides.js"
   ]
 }

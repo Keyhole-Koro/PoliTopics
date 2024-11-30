@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import './TopHeadlines.css';
-import { Article } from '@interfaces/Article';
 
 interface TopHeadlinesProps {
-    headlines: Article[];
+    headlines: { title: string; id: number; date: string; description: string; category: string }[];
     onHeadlineClick: (id: number) => void;
 }
 
@@ -12,7 +11,6 @@ const TopHeadlines: React.FC<TopHeadlinesProps> = ({ headlines, onHeadlineClick 
   const [dateFilter, setDateFilter] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   const filteredHeadlines = headlines
     .filter(headline =>
@@ -23,16 +21,6 @@ const TopHeadlines: React.FC<TopHeadlinesProps> = ({ headlines, onHeadlineClick 
     .sort((a, b) => sortOrder === 'asc' ? new Date(a.date).getTime() - new Date(b.date).getTime() : new Date(b.date).getTime() - new Date(a.date).getTime());
 
   const categories = Array.from(new Set(headlines.map(headline => headline.category)));
-
-  const handleCategoryClick = (category: string) => {
-    if (selectedCategory === category) {
-      setSelectedCategory(null);
-      setCategoryFilter('');
-    } else {
-      setSelectedCategory(category);
-      setCategoryFilter(category);
-    }
-  };
 
   return (
     <div className="top-headlines">
@@ -61,8 +49,8 @@ const TopHeadlines: React.FC<TopHeadlinesProps> = ({ headlines, onHeadlineClick 
           {categories.map(category => (
             <button
               key={category}
-              onClick={() => handleCategoryClick(category)}
-              className={`category-button ${selectedCategory === category ? 'active' : ''}`}
+              className={`category-button ${categoryFilter === category ? 'active' : ''}`}
+              onClick={() => setCategoryFilter(category)}
             >
               {category}
             </button>

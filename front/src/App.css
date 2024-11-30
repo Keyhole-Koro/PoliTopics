@@ -1,12 +1,31 @@
-.App {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  text-align: center;
-  background-color: #f8f9fa;
+.app-header {
+  background-color: #282c34;
   padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.App-header h1 {
-  color: #333;
-  font-size: 48px;
-  margin-bottom: 10px;
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.app-logo {
+  height: 50px;
+  margin-right: 20px;
+}
+
+.app-title {
+  font-size: 2.5rem;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  color: #61dafb;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+main {
+  padding: 20px;
 }

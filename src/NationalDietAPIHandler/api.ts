@@ -7,7 +7,7 @@ interface FetchKokkaiDataParams {
 // Define a generic type for the response data (can be adjusted as needed)
 type KokkaiApiResponse = any;
 
-async function fetchKokkaiRecords({ endpoint, query = {} }: FetchKokkaiDataParams): Promise<KokkaiApiResponse | undefined> {
+export default async function fetchKokkaiRecords({ endpoint, query = {} }: FetchKokkaiDataParams): Promise<KokkaiApiResponse | undefined> {
   // Base URL
   const baseUrl = `https://kokkai.ndl.go.jp/api/${endpoint}`;
   

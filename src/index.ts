@@ -28,60 +28,35 @@ generateSummery(gemini_api_key, conv).then((res) => {
 });
 */
 
-import { addArticle } from "./DynamoDBHandler/dynamodb";
-import { Reaction } from "@interfaces/Article";
+import { DynamoDBHandler } from "./DynamoDBHandler/dynamodb";
+import { Article, Reaction } from "@interfaces/Article";
+import { articles } from "./samples/samples";
 
-const article = {
-  id: 1,
-  title: "Introduction to JavaScript",
-  date: "2024-10-01",
-  category: "Programming",
-  summary: "A beginner's guide to JavaScript, covering the basics of the language, syntax, and common use cases.",
-  description: "This article introduces JavaScript, one of the most widely used programming languages. It explains its history, basic syntax, and how to start using it for web development. It also touches on popular JavaScript libraries and frameworks.",
-  dialogs: [
-    {
-      id: 1,
-      speaker: "Alice",
-      summary: "Alice introduces herself and starts talking about JavaScript.",
-      response_to: [
-        {
-          dialog_id: 2,
-          reaction: "AGREE" as Reaction
-        }
-      ]
-    },
-    {
-      id: 2,
-      speaker: "Bob",
-      summary: "Bob agrees with Alice and adds some insights on the importance of JavaScript in modern web development.",
-      response_to: []
-    }
-  ],
-  participants: [
-    {
-      name: "Alice",
-      summary: "A web developer with 5 years of experience in JavaScript and frontend frameworks."
-    },
-    {
-      name: "Bob",
-      summary: "A software engineer with expertise in both frontend and backend development."
-    }
-  ],
-  keywords: ["JavaScript", "web development", "programming languages", "beginner guide"],
-  terms: [
-    {
-      term: "JavaScript",
-      definition: "A high-level, interpreted programming language primarily used for building interactive and dynamic websites."
-    },
-    {
-      term: "Frontend",
-      definition: "The part of a website or application that users interact with directly, typically involving HTML, CSS, and JavaScript."
-    }
-  ]
-};
+const ddbHandler = new DynamoDBHandler();
+articles.forEach(async (article: Article) => {
+  try {
+    await ddbHandler.addArticle(article);
+    console.log("Article added");
+  } catch (err) {
+    console.error(err);
+  }
+});
 
-addArticle(article).then(() => {
-  console.log("Article added");
-}).catch((err) => {
-  console.error(err);
+ddbHandler.getArticleById("3").then((res: any) => {
+  console.log("getArticleById", res);
+}).catch((err: any) => {
+  console.error("getArticleById", err);
+});
+/*
+ddbHandler.getArticlesByKeyword("finance").then((res: any) => {
+  console.log("getArticlesByKeyword", res);
+}).catch((err: any) => {
+  console.error("getArticlesByKeyword" ,err);
+});
+*/
+
+ddbHandler.getArticleByDate("2024-10-06").then((res: any) => {
+  console.log("getArticleByDate", res);
+}).catch((err: any) => {
+  console.error("getArticleByDate", err);
 });

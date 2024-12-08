@@ -10,11 +10,11 @@
     "moduleResolution": "node",          // Resolve modules like Node.js does
     "resolveJsonModule": true,           // Allow importing JSON files
     "allowJs": false,                     // Only compile TypeScript files
-    
+
     "baseUrl": "./src",                    // Base URL for module resolution
     "paths": {         // Optional: For aliasing paths (e.g., "@/components")
       "@interfaces/*": ["interfaces/*"],
-      "DynamoDBHandler/*": ["DynamoDBHandler/*"],
+      "@DynamoDBHandler/*": ["DynamoDBHandler/*"],
       "@GeminiHandler/*": ["GeminiHandler/*"],
       "@NationalDietAPIHandler/*": ["NationalDietAPIHandler/*"],
       "@utils/*": ["utils/*"]

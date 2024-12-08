@@ -37,4 +37,6 @@ export enum Reaction {
   AGREE = "agree",
   DISAGREE = "disagree",
   NEUTRAL = "neutral",
+  QUESTION = "question",
+  ANSWER = "answer"
 }

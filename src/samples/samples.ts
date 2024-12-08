@@ -1,8 +1,6 @@
-const AGREE = "agree";
-const DISAGREE = "disagree";
-const NEUTRAL = "neutral";
+import { Article, Reaction } from '../interfaces/Article';
 
-const articles = [
+export const articles: Article[] = [
   { 
     title: 'Local Sports Team Wins Championship', 
     id: 1, 
@@ -26,7 +24,7 @@ const articles = [
         summary: 'We played our best game.',
         response_to: [{
           dialog_id: -1,
-          reaction: AGREE
+          reaction: Reaction.AGREE
         }]
       },
       {
@@ -35,7 +33,7 @@ const articles = [
         summary: 'It was a tough match, but we gave it our all.',
         response_to: [{
           dialog_id: 0,
-          reaction: AGREE
+          reaction: Reaction.AGREE
         }]
       },
       {
@@ -44,7 +42,7 @@ const articles = [
         summary: 'The atmosphere was electric!',
         response_to: [{
           dialog_id: 1,
-          reaction: AGREE
+          reaction: Reaction.AGREE
         }]
       }
     ]
@@ -74,7 +72,7 @@ const articles = [
         summary: 'This policy will create jobs.',
         response_to: [{
           dialog_id: -1,
-          reaction: AGREE
+          reaction: Reaction.AGREE
         }]
       },
       {
@@ -83,7 +81,7 @@ const articles = [
         summary: 'The policy has potential, but we need to see the details.',
         response_to: [{
           dialog_id: 0,
-          reaction: NEUTRAL
+          reaction: Reaction.NEUTRAL
         }]
       },
       {
@@ -92,7 +90,7 @@ const articles = [
         summary: 'We have concerns about the implementation.',
         response_to: [{
           dialog_id: 1,
-          reaction: DISAGREE
+          reaction: Reaction.DISAGREE
         }]
       },
       {
@@ -101,7 +99,7 @@ const articles = [
         summary: 'Can you provide more specifics on the job creation aspect?',
         response_to: [{
           dialog_id: 0,
-          reaction: 'QUESTION'
+          reaction: Reaction.QUESTION
         }]
       },
       {
@@ -110,7 +108,7 @@ const articles = [
         summary: 'We plan to create 100,000 new jobs in the next year.',
         response_to: [{
           dialog_id: 3,
-          reaction: 'ANSWER'
+          reaction: Reaction.ANSWER
         }]
       },
       {
@@ -119,7 +117,7 @@ const articles = [
         summary: 'What sectors will these jobs be in?',
         response_to: [{
           dialog_id: 4,
-          reaction: 'QUESTION'
+          reaction: Reaction.QUESTION
         }]
       },
       {
@@ -128,7 +126,7 @@ const articles = [
         summary: 'Primarily in technology and green energy sectors.',
         response_to: [{
           dialog_id: 5,
-          reaction: 'ANSWER'
+          reaction: Reaction.ANSWER
         }]
       },
       {
@@ -137,7 +135,7 @@ const articles = [
         summary: 'How will you ensure these jobs are sustainable?',
         response_to: [{
           dialog_id: 6,
-          reaction: 'QUESTION'
+          reaction: Reaction.QUESTION
         }]
       },
       {
@@ -146,7 +144,7 @@ const articles = [
         summary: 'We have a long-term plan to support these sectors.',
         response_to: [{
           dialog_id: 7,
-          reaction: 'ANSWER'
+          reaction: Reaction.ANSWER
         }]
       },
       {
@@ -155,7 +153,7 @@ const articles = [
         summary: 'What measures are in place to track the progress?',
         response_to: [{
           dialog_id: 8,
-          reaction: 'QUESTION'
+          reaction: Reaction.QUESTION
         }]
       },
       {
@@ -164,7 +162,7 @@ const articles = [
         summary: 'We will have quarterly reports and independent audits.',
         response_to: [{
           dialog_id: 9,
-          reaction: 'ANSWER'
+          reaction: Reaction.ANSWER
         }]
       },
       {
@@ -173,7 +171,7 @@ const articles = [
         summary: 'We will be closely monitoring the implementation.',
         response_to: [{
           dialog_id: 10,
-          reaction: NEUTRAL
+          reaction: Reaction.NEUTRAL
         }]
       }
     ]
@@ -201,7 +199,7 @@ const articles = [
         summary: 'The market is volatile.',
         response_to: [{
           dialog_id: -1,
-          reaction: NEUTRAL
+          reaction: Reaction.NEUTRAL
         }]
       },
       {
@@ -210,7 +208,7 @@ const articles = [
         summary: 'I am cautious about investing right now.',
         response_to: [{
           dialog_id: 0,
-          reaction: AGREE
+          reaction: Reaction.AGREE
         }]
       },
       {
@@ -219,7 +217,7 @@ const articles = [
         summary: 'Diversification is key in these times.',
         response_to: [{
           dialog_id: 1,
-          reaction: AGREE
+          reaction: Reaction.AGREE
         }]
       }
     ]
@@ -247,7 +245,7 @@ const articles = [
         summary: 'This is an interesting event.',
         response_to: [{
           dialog_id: -1,
-          reaction: AGREE
+          reaction: Reaction.AGREE
         }]
       },
       {
@@ -256,7 +254,7 @@ const articles = [
         summary: 'I enjoyed the event thoroughly.',
         response_to: [{
           dialog_id: 0,
-          reaction: AGREE
+          reaction: Reaction.AGREE
         }]
       },
       {
@@ -265,7 +263,7 @@ const articles = [
         summary: 'We are glad to see such a positive response.',
         response_to: [{
           dialog_id: 1,
-          reaction: AGREE
+          reaction: Reaction.AGREE
         }]
       }
     ]
@@ -292,7 +290,7 @@ const articles = [
         summary: 'I saw it happen.',
         response_to: [{
           dialog_id: -1,
-          reaction: NEUTRAL
+          reaction: Reaction.NEUTRAL
         }]
       },
       {
@@ -301,7 +299,7 @@ const articles = [
         summary: 'Can you describe what you saw?',
         response_to: [{
           dialog_id: 0,
-          reaction: NEUTRAL
+          reaction: Reaction.NEUTRAL
         }]
       },
       {
@@ -310,7 +308,7 @@ const articles = [
         summary: 'It was a chaotic scene.',
         response_to: [{
           dialog_id: 1,
-          reaction: NEUTRAL
+          reaction: Reaction.NEUTRAL
         }]
       }
     ]
@@ -339,7 +337,7 @@ const articles = [
         summary: 'This will change the world.',
         response_to: [{
           dialog_id: -1,
-          reaction: AGREE
+          reaction: Reaction.AGREE
         }]
       },
       {
@@ -348,7 +346,7 @@ const articles = [
         summary: 'The applications are endless.',
         response_to: [{
           dialog_id: 0,
-          reaction: AGREE
+          reaction: Reaction.AGREE
         }]
       },
       {
@@ -357,7 +355,7 @@ const articles = [
         summary: 'We are excited to see the potential.',
         response_to: [{
           dialog_id: 1,
-          reaction: AGREE
+          reaction: Reaction.AGREE
         }]
       }
     ]
@@ -385,7 +383,7 @@ const articles = [
         summary: 'Follow these guidelines for better health.',
         response_to: [{
           dialog_id: -1,
-          reaction: AGREE
+          reaction: Reaction.AGREE
         }]
       },
       {
@@ -394,7 +392,7 @@ const articles = [
         summary: 'How will these guidelines help?',
         response_to: [{
           dialog_id: 0,
-          reaction: NEUTRAL
+          reaction: Reaction.NEUTRAL
         }]
       },
       {
@@ -403,7 +401,7 @@ const articles = [
         summary: 'They are based on the latest research.',
         response_to: [{
           dialog_id: 1,
-          reaction: AGREE
+          reaction: Reaction.AGREE
         }]
       }
     ]
@@ -431,7 +429,7 @@ const articles = [
         summary: 'We are thrilled with the success.',
         response_to: [{
           dialog_id: -1,
-          reaction: AGREE
+          reaction: Reaction.AGREE
         }]
       },
       {
@@ -440,7 +438,7 @@ const articles = [
         summary: 'The audience response has been amazing.',
         response_to: [{
           dialog_id: 0,
-          reaction: AGREE
+          reaction: Reaction.AGREE
         }]
       },
       {
@@ -449,7 +447,7 @@ const articles = [
         summary: 'The movie is a masterpiece.',
         response_to: [{
           dialog_id: 1,
-          reaction: AGREE
+          reaction: Reaction.AGREE
         }]
       }
     ]
@@ -476,7 +474,7 @@ const articles = [
         summary: 'Take precautions.',
         response_to: [{
           dialog_id: -1,
-          reaction: AGREE
+          reaction: Reaction.AGREE
         }]
       },
       {
@@ -485,7 +483,7 @@ const articles = [
         summary: 'What areas will be affected?',
         response_to: [{
           dialog_id: 0,
-          reaction: NEUTRAL
+          reaction: Reaction.NEUTRAL
         }]
       },
       {
@@ -494,7 +492,7 @@ const articles = [
         summary: 'The entire region is at risk.',
         response_to: [{
           dialog_id: 1,
-          reaction: AGREE
+          reaction: Reaction.AGREE
         }]
       }
     ]
@@ -521,7 +519,7 @@ const articles = [
         summary: 'Check the advisory before traveling.',
         response_to: [{
           dialog_id: -1,
-          reaction: NEUTRAL
+          reaction: Reaction.NEUTRAL
         }]
       },
       {
@@ -530,7 +528,7 @@ const articles = [
         summary: 'What are the main concerns?',
         response_to: [{
           dialog_id: 0,
-          reaction: NEUTRAL
+          reaction: Reaction.NEUTRAL
         }]
       },
       {
@@ -539,7 +537,7 @@ const articles = [
         summary: 'There are safety and health concerns.',
         response_to: [{
           dialog_id: 1,
-          reaction: NEUTRAL
+          reaction: Reaction.NEUTRAL
         }]
       }
     ]
@@ -566,7 +564,7 @@ const articles = [
         summary: 'Join us for a fun weekend.',
         response_to: [{
           dialog_id: -1,
-          reaction: AGREE
+          reaction: Reaction.AGREE
         }]
       },
       {
@@ -575,7 +573,7 @@ const articles = [
         summary: 'What activities are planned?',
         response_to: [{
           dialog_id: 0,
-          reaction: NEUTRAL
+          reaction: Reaction.NEUTRAL
         }]
       },
       {
@@ -584,11 +582,9 @@ const articles = [
         summary: 'There will be games, food, and music.',
         response_to: [{
           dialog_id: 1,
-          reaction: AGREE
+          reaction: Reaction.AGREE
         }]
       }
     ]
   },
 ];
-
-module.exports = articles;

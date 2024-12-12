@@ -33,6 +33,7 @@ import { Article, Reaction } from "@interfaces/Article";
 import { articles } from "./samples/samples";
 
 const ddbHandler = new DynamoDBHandler();
+
 /*
 articles.forEach(async (article: Article) => {
   try {
@@ -44,6 +45,12 @@ articles.forEach(async (article: Article) => {
 });
 */
 
+ddbHandler.getArticlesByParticipant("Traveler").then((res: any) => {
+  console.log("getArticleIdsByParticipant", res);
+}).catch((err: any) => {
+  console.error("getArticleIdsByParticipant", err);
+});
+
 /*
 ddbHandler.getArticleById("3").then((res: any) => {
   console.log("getArticleById", res);
@@ -52,11 +59,21 @@ ddbHandler.getArticleById("3").then((res: any) => {
 });
 */
 
+/*
 ddbHandler.getArticleByKeyword("finance").then((res: any) => {
   console.log("getArticlesByKeyword", res);
 }).catch((err: any) => {
   console.error("getArticlesByKeyword" ,err);
 });
+*/
+
+/*
+ddbHandler.getLatestArticles(5).then((res: any) => {
+  console.log("getLatestArticles", res);
+}).catch((err: any) => {
+  console.error("getLatestArticles", err);
+});
+*/
 
 /*
 ddbHandler.getArticleByDate("2024-10-06").then((res: any) => {

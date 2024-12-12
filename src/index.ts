@@ -33,30 +33,35 @@ import { Article, Reaction } from "@interfaces/Article";
 import { articles } from "./samples/samples";
 
 const ddbHandler = new DynamoDBHandler();
+/*
 articles.forEach(async (article: Article) => {
   try {
-    await ddbHandler.addArticle(article);
+    await ddbHandler.addNews(article);
     console.log("Article added");
   } catch (err) {
     console.error(err);
   }
 });
+*/
 
+/*
 ddbHandler.getArticleById("3").then((res: any) => {
   console.log("getArticleById", res);
 }).catch((err: any) => {
   console.error("getArticleById", err);
 });
-/*
-ddbHandler.getArticlesByKeyword("finance").then((res: any) => {
+*/
+
+ddbHandler.getArticleByKeyword("finance").then((res: any) => {
   console.log("getArticlesByKeyword", res);
 }).catch((err: any) => {
   console.error("getArticlesByKeyword" ,err);
 });
-*/
 
+/*
 ddbHandler.getArticleByDate("2024-10-06").then((res: any) => {
   console.log("getArticleByDate", res);
 }).catch((err: any) => {
   console.error("getArticleByDate", err);
 });
+*/

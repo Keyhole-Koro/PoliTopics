@@ -9,7 +9,7 @@ import {
   AttributeDefinition,
   ScalarAttributeType,
 } from "@aws-sdk/client-dynamodb";
-import { DynamoDBDocumentClient, GetCommand } from "@aws-sdk/lib-dynamodb";
+import { DynamoDBDocumentClient, GetCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
 
 import { Article } from "@interfaces/Article";
 
@@ -25,8 +25,8 @@ export class DynamoDBHandler {
   private readonly DateIndex: string;
 
   constructor() {
-    this.ARTICLE_TABLE_NAME = "NextArticles";
-    this.KEYWORD_TABLE_NAME = "Keywords";
+    this.ARTICLE_TABLE_NAME = "Articles";
+    this.KEYWORD_TABLE_NAME = "KeywordArticleIds";
     this.REGION = "us-east-1";
     this.ACCESS_KEY_ID = "local";
     this.SECRET_ACCESS_KEY = "local";
@@ -48,7 +48,7 @@ export class DynamoDBHandler {
     console.log("Article added successfully.");
     // Add keywords to the database
     for (const keyword of news.keywords) {
-      await this.addKeyword(keyword, news.id);
+      await this.addKeyword(keyword, news.id.toString());
     }
     console.log("Keywords added successfully.");
   }
@@ -100,72 +100,60 @@ export class DynamoDBHandler {
     }
   };
 
-  async addKeyword(keyword: string, articleId: number): Promise<void> {
-    const command = new PutItemCommand({
+  async addKeyword(keyword: string, articleId: string): Promise<void> {
+    const params = {
       TableName: this.KEYWORD_TABLE_NAME,
       Item: {
         keyword: { S: keyword },
-        articleId: { N: articleId.toString() }
-      }
-    });
-    
+        dataId: { S: articleId },
+      },
+    };
+  
     try {
-      await this.ddbDocClient.send(command);
-      console.log("Keyword added successfully.");
+      await this.ddbDocClient.send(new PutItemCommand(params));
+      console.log(`Successfully added keyword: ${keyword}, dataId: ${articleId}`);
     } catch (error) {
-      console.error("Error adding keyword:", error);
+      console.error("Error adding keyword index:", error);
     }
-  }
-    /*
+  };
 
-  async getArticlesByKeyword(keyword: string): Promise<Article[]> {
-    // DynamoDB クエリ
+  async getArticleIdsByKeyword(keyword: string): Promise<string[]> {
     const command = new QueryCommand({
       TableName: this.KEYWORD_TABLE_NAME,
-      IndexName: "KeywordIndex", // GSI1
-      KeyConditionExpression: "#keywords = :keywordsValue",
+      KeyConditionExpression: "#k = :keywordValue",
       ExpressionAttributeNames: {
-        "#keywords": "keywords",
+        "#k": "keyword",
       },
       ExpressionAttributeValues: {
-        ":keywordsValue": { S: keyword },
+        ":keywordValue": { S: keyword },
       },
     });
   
-    const response = await this.ddbDocClient.send(command);
+    try {
+      const result = await this.ddbDocClient.send(command);
+      return (result.Items || []).map(item => item.dataId.S!);
+    } catch (error) {
+      console.error("Error retrieving data IDs:", error);
+      return [];
+    }
+  }
 
-    console.log(response);
-  
-    // articleId を収集
-    const articleIds = response.Items?.map(item => {
-      // item.articleId が適切な型かどうか確認
-      if (item.articleId?.S) {
-        return item.articleId.S; // 文字列型
-      }
-      return null;
-    }).filter((id): id is string => id !== null); // null を除外
-
-    if (!articleIds) {
+  async getArticleByKeyword(keyword: string): Promise<Article[]> {
+    const articleIds = await this.getArticleIdsByKeyword(keyword);
+    if (!articleIds.length) {
       return [];
     }
   
-    // 並列に記事を取得
-    const articles = await Promise.all(
-      articleIds.map(async articleId => {
-        try {
-          return await this.getArticleById(articleId);
-        } catch (err) {
-          console.error(`Failed to fetch article with ID: ${articleId}`, err);
-          return null; // エラー時は null を返す
-        }
+    const articles: (Article | null)[] = await Promise.all(
+      articleIds.map(async (id) => {
+        const fetchedArticle = await this.getArticleById(id);
+        return fetchedArticle;
       })
     );
+    // Filter out any null values
+    return articles.filter(article => article !== null) as Article[];
   
-    // null を除外して返却
-    return articles.filter((article): article is Article => article !== null);
   }
-  
-    */
 
   async getArticleById(id: string): Promise<Article | null> {
     const command = new GetCommand({

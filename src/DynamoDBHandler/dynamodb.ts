@@ -3,9 +3,6 @@ import {
   QueryCommand,
   PutItemCommand,
   ScanCommand,
-  DescribeTableCommand,
-  CreateTableCommand,
-  UpdateTableCommand,
 } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, GetCommand } from "@aws-sdk/lib-dynamodb";
 import { Article } from "@interfaces/Article";
@@ -71,7 +68,7 @@ export class DynamoDBHandler {
     const command = new PutItemCommand({
       TableName: this.ARTICLE_TABLE_NAME,
       Item: {
-        id: { S: article.id.toString() },
+        id: { S: article.id },
         title: { S: article.title },
         date: { S: article.date },
         category: { S: article.category },
@@ -186,7 +183,7 @@ export class DynamoDBHandler {
   async getArticleById(id: string): Promise<Article | null> {
     const command = new GetCommand({
       TableName: this.ARTICLE_TABLE_NAME,
-      Key: { id: { S: id } },
+      Key: { id: id },
     });
 
     try {

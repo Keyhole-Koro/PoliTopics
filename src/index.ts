@@ -30,12 +30,11 @@ generateSummery(gemini_api_key, conv).then((res) => {
 
 import { DynamoDBHandler } from "./DynamoDBHandler/dynamodb";
 import { Article, Reaction } from "@interfaces/Article";
-import { articles } from "./samples/samples";
+import { articles2 } from "./samples/samples";
 
 const ddbHandler = new DynamoDBHandler();
 
-
-articles.forEach(async (article: Article) => {
+articles2.forEach(async (article: Article) => {
   try {
     await ddbHandler.addNews(article);
     console.log("Article added");
@@ -43,6 +42,8 @@ articles.forEach(async (article: Article) => {
     console.error(err);
   }
 });
+
+/*
 
 ddbHandler.getArticlesByParticipant("Traveler").then((res: any) => {
   console.log("getArticleIdsByParticipant", res);
@@ -73,3 +74,5 @@ ddbHandler.getArticleByDate("2024-10-06").then((res: any) => {
 }).catch((err: any) => {
   console.error("getArticleByDate", err);
 });
+
+*/

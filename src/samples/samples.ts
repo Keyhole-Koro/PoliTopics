@@ -1,27 +1,28 @@
 import { Article, Reaction } from '../interfaces/Article';
 
-export const articles: Article[] = [
+
+export const articles2: Article[] = [
   { 
-    title: 'Local Sports Team Wins Championship', 
-    id: 1, 
+    title: '地元スポーツチームが優勝', 
+    id: "1", 
     date: '2023-10-03', 
-    summary: 'The local sports team clinched the championship title in a thrilling final match.', 
-    description: 'The local sports team clinched the championship title in a thrilling final match.', 
-    category: 'Sports', 
-    keywords: ['sports', 'championship', 'local team'],
+    summary: '地元のスポーツチームが劇的な試合で優勝を果たしました。', 
+    description: '地元のスポーツチームが劇的な試合で優勝を果たしました。', 
+    category: 'スポーツ', 
+    keywords: ['スポーツ', '優勝', '地元チーム'],
     participants: [
-      { name: 'Coach', summary: 'We played our best game.' },
-      { name: 'Player', summary: 'It was a tough match, but we gave it our all.' },
-      { name: 'Fan', summary: 'The atmosphere was electric!' }
+      { name: 'コーチ', summary: '最高の試合をしました。' },
+      { name: '選手', summary: '厳しい試合でしたが全力を尽くしました。' },
+      { name: 'ファン', summary: '会場の雰囲気が最高でした！' }
     ],
     terms: [
-      { term: 'championship', definition: 'A competition to find the best team or player in a particular sport.' }
+      { term: '優勝', definition: '特定のスポーツで最高のチームまたは選手を決める競技。' }
     ],
     dialogs: [
       {
         id: 0,
-        speaker: 'Coach',
-        summary: 'We played our best game.',
+        speaker: 'コーチ',
+        summary: '最高の試合をしました。',
         response_to: [{
           dialog_id: -1,
           reaction: Reaction.AGREE
@@ -29,8 +30,8 @@ export const articles: Article[] = [
       },
       {
         id: 1,
-        speaker: 'Player',
-        summary: 'It was a tough match, but we gave it our all.',
+        speaker: '選手',
+        summary: '厳しい試合でしたが全力を尽くしました。',
         response_to: [{
           dialog_id: 0,
           reaction: Reaction.AGREE
@@ -38,8 +39,8 @@ export const articles: Article[] = [
       },
       {
         id: 2,
-        speaker: 'Fan',
-        summary: 'The atmosphere was electric!',
+        speaker: 'ファン',
+        summary: '会場の雰囲気が最高でした！',
         response_to: [{
           dialog_id: 1,
           reaction: Reaction.AGREE
@@ -48,28 +49,28 @@ export const articles: Article[] = [
     ]
   },
   { 
-    title: 'Government Proposes New Policy', 
-    id: 2, 
+    title: '政府が新政策を提案', 
+    id: "2", 
     date: '2023-10-04', 
-    summary: 'The government has proposed a new policy aimed at boosting economic growth and job creation.', 
-    description: 'The government has proposed a new policy aimed at boosting economic growth and job creation.', 
-    category: 'Politics', 
-    keywords: ['government', 'policy', 'economy'],
+    summary: '政府が経済成長と雇用創出を目的とした新しい政策を提案しました。', 
+    description: '政府が経済成長と雇用創出を目的とした新しい政策を提案しました。', 
+    category: '政治', 
+    keywords: ['政府', '政策', '経済', '雇用'],
     participants: [
-      { name: 'Minister', summary: 'This policy will create jobs.' },
-      { name: 'Economist', summary: 'The policy has potential, but we need to see the details.' },
-      { name: 'Opposition Leader', summary: 'We have concerns about the implementation.' },
-      { name: 'Journalist', summary: 'Can you provide more specifics on the job creation aspect?' }
+      { name: '大臣', summary: 'この政策は雇用を創出します。' },
+      { name: '経済学者', summary: '政策には可能性がありますが、詳細を見る必要があります。' },
+      { name: '野党リーダー', summary: '実施方法に懸念があります。' },
+      { name: 'ジャーナリスト', summary: '雇用創出の具体的な詳細を教えていただけますか？' }
     ],
     terms: [
-      { term: 'policy', definition: 'A course or principle of action adopted or proposed by an organization or individual.' },
-      { term: 'economy', definition: 'The wealth and resources of a country or region, especially in terms of the production and consumption of goods and services.' }
+      { term: '政策', definition: '組織や個人が採用または提案する行動の方針。' },
+      { term: '経済', definition: '特定の地域や国の財産や資源、特に生産や消費に関連するもの。' }
     ],
     dialogs: [
       {
         id: 0,
-        speaker: 'Minister',
-        summary: 'This policy will create jobs.',
+        speaker: '大臣',
+        summary: 'この政策は雇用を創出します。',
         response_to: [{
           dialog_id: -1,
           reaction: Reaction.AGREE
@@ -77,8 +78,8 @@ export const articles: Article[] = [
       },
       {
         id: 1,
-        speaker: 'Economist',
-        summary: 'The policy has potential, but we need to see the details.',
+        speaker: '経済学者',
+        summary: '政策には可能性がありますが、詳細を見る必要があります。',
         response_to: [{
           dialog_id: 0,
           reaction: Reaction.NEUTRAL
@@ -86,8 +87,8 @@ export const articles: Article[] = [
       },
       {
         id: 2,
-        speaker: 'Opposition Leader',
-        summary: 'We have concerns about the implementation.',
+        speaker: '野党リーダー',
+        summary: '実施方法に懸念があります。',
         response_to: [{
           dialog_id: 1,
           reaction: Reaction.DISAGREE
@@ -95,108 +96,36 @@ export const articles: Article[] = [
       },
       {
         id: 3,
-        speaker: 'Journalist',
-        summary: 'Can you provide more specifics on the job creation aspect?',
+        speaker: 'ジャーナリスト',
+        summary: '雇用創出の具体的な詳細を教えていただけますか？',
         response_to: [{
           dialog_id: 0,
           reaction: Reaction.QUESTION
-        }]
-      },
-      {
-        id: 4,
-        speaker: 'Minister',
-        summary: 'We plan to create 100,000 new jobs in the next year.',
-        response_to: [{
-          dialog_id: 3,
-          reaction: Reaction.ANSWER
-        }]
-      },
-      {
-        id: 5,
-        speaker: 'Economist',
-        summary: 'What sectors will these jobs be in?',
-        response_to: [{
-          dialog_id: 4,
-          reaction: Reaction.QUESTION
-        }]
-      },
-      {
-        id: 6,
-        speaker: 'Minister',
-        summary: 'Primarily in technology and green energy sectors.',
-        response_to: [{
-          dialog_id: 5,
-          reaction: Reaction.ANSWER
-        }]
-      },
-      {
-        id: 7,
-        speaker: 'Opposition Leader',
-        summary: 'How will you ensure these jobs are sustainable?',
-        response_to: [{
-          dialog_id: 6,
-          reaction: Reaction.QUESTION
-        }]
-      },
-      {
-        id: 8,
-        speaker: 'Minister',
-        summary: 'We have a long-term plan to support these sectors.',
-        response_to: [{
-          dialog_id: 7,
-          reaction: Reaction.ANSWER
-        }]
-      },
-      {
-        id: 9,
-        speaker: 'Economist',
-        summary: 'What measures are in place to track the progress?',
-        response_to: [{
-          dialog_id: 8,
-          reaction: Reaction.QUESTION
-        }]
-      },
-      {
-        id: 10,
-        speaker: 'Minister',
-        summary: 'We will have quarterly reports and independent audits.',
-        response_to: [{
-          dialog_id: 9,
-          reaction: Reaction.ANSWER
-        }]
-      },
-      {
-        id: 11,
-        speaker: 'Opposition Leader',
-        summary: 'We will be closely monitoring the implementation.',
-        response_to: [{
-          dialog_id: 10,
-          reaction: Reaction.NEUTRAL
         }]
       }
     ]
   },
   { 
-    title: 'Finance Headline 1', 
-    id: 3, 
+    title: '金融市場の動向', 
+    id: "3", 
     date: '2023-10-05', 
-    summary: 'Description for headline 1.', 
-    description: 'Description for headline 1.', 
-    category: 'Finance', 
-    keywords: ['finance', 'headline 1'],
+    summary: '市場の動向についての分析が注目されています。', 
+    description: '市場の動向についての分析が注目されています。', 
+    category: '金融', 
+    keywords: ['金融', '市場', '分析'],
     participants: [
-      { name: 'Analyst', summary: 'The market is volatile.' },
-      { name: 'Investor', summary: 'I am cautious about investing right now.' },
-      { name: 'Financial Advisor', summary: 'Diversification is key in these times.' }
+      { name: 'アナリスト', summary: '市場は現在不安定です。' },
+      { name: '投資家', summary: '今は慎重に投資を進めています。' },
+      { name: 'ファイナンシャルアドバイザー', summary: 'このような時期には分散投資が鍵です。' }
     ],
     terms: [
-      { term: 'finance', definition: 'The management of large amounts of money, especially by governments or large companies.' }
+      { term: '金融', definition: '特に政府や大企業による大量の資金の管理。' }
     ],
     dialogs: [
       {
         id: 0,
-        speaker: 'Analyst',
-        summary: 'The market is volatile.',
+        speaker: 'アナリスト',
+        summary: '市場は現在不安定です。',
         response_to: [{
           dialog_id: -1,
           reaction: Reaction.NEUTRAL
@@ -204,8 +133,8 @@ export const articles: Article[] = [
       },
       {
         id: 1,
-        speaker: 'Investor',
-        summary: 'I am cautious about investing right now.',
+        speaker: '投資家',
+        summary: '今は慎重に投資を進めています。',
         response_to: [{
           dialog_id: 0,
           reaction: Reaction.AGREE
@@ -213,8 +142,58 @@ export const articles: Article[] = [
       },
       {
         id: 2,
-        speaker: 'Financial Advisor',
-        summary: 'Diversification is key in these times.',
+        speaker: 'ファイナンシャルアドバイザー',
+        summary: 'このような時期には分散投資が鍵です。',
+        response_to: [{
+          dialog_id: 1,
+          reaction: Reaction.AGREE
+        }]
+      }
+    ]
+  }
+];
+
+
+export const articles = [
+  { 
+    title: '地元スポーツチームが優勝', 
+    id: 1, 
+    date: '2023-10-03', 
+    summary: '地元のスポーツチームが劇的な試合で優勝を果たしました。', 
+    description: '地元のスポーツチームが劇的な試合で優勝を果たしました。', 
+    category: 'スポーツ', 
+    keywords: ['スポーツ', '優勝', '地元チーム'],
+    participants: [
+      { name: 'コーチ', summary: '最高の試合をしました。' },
+      { name: '選手', summary: '厳しい試合でしたが全力を尽くしました。' },
+      { name: 'ファン', summary: '会場の雰囲気が最高でした！' }
+    ],
+    terms: [
+      { term: '優勝', definition: '特定のスポーツで最高のチームまたは選手を決める競技。' }
+    ],
+    dialogs: [
+      {
+        id: 0,
+        speaker: 'コーチ',
+        summary: '最高の試合をしました。',
+        response_to: [{
+          dialog_id: -1,
+          reaction: Reaction.AGREE
+        }]
+      },
+      {
+        id: 1,
+        speaker: '選手',
+        summary: '厳しい試合でしたが全力を尽くしました。',
+        response_to: [{
+          dialog_id: 0,
+          reaction: Reaction.AGREE
+        }]
+      },
+      {
+        id: 2,
+        speaker: 'ファン',
+        summary: '会場の雰囲気が最高でした！',
         response_to: [{
           dialog_id: 1,
           reaction: Reaction.AGREE
@@ -223,26 +202,28 @@ export const articles: Article[] = [
     ]
   },
   { 
-    title: 'Miscellaneous Headline 2', 
-    id: 4, 
-    date: '2023-10-06', 
-    summary: 'Description for headline 2.', 
-    description: 'Description for headline 2.', 
-    category: 'Miscellaneous', 
-    keywords: ['miscellaneous', 'headline 1'],
+    title: '政府が新政策を提案', 
+    id: "2", 
+    date: '2023-10-04', 
+    summary: '政府が経済成長と雇用創出を目的とした新しい政策を提案しました。', 
+    description: '政府が経済成長と雇用創出を目的とした新しい政策を提案しました。', 
+    category: '政治', 
+    keywords: ['政府', '政策', '経済', '雇用'],
     participants: [
-      { name: 'Reporter', summary: 'This is an interesting event.' },
-      { name: 'Attendee', summary: 'I enjoyed the event thoroughly.' },
-      { name: 'Organizer', summary: 'We are glad to see such a positive response.' }
+      { name: '大臣', summary: 'この政策は雇用を創出します。' },
+      { name: '経済学者', summary: '政策には可能性がありますが、詳細を見る必要があります。' },
+      { name: '野党リーダー', summary: '実施方法に懸念があります。' },
+      { name: 'ジャーナリスト', summary: '雇用創出の具体的な詳細を教えていただけますか？' }
     ],
     terms: [
-      { term: 'miscellaneous', definition: 'Various types or from different sources.' }
+      { term: '政策', definition: '組織や個人が採用または提案する行動の方針。' },
+      { term: '経済', definition: '特定の地域や国の財産や資源、特に生産や消費に関連するもの。' }
     ],
     dialogs: [
       {
         id: 0,
-        speaker: 'Reporter',
-        summary: 'This is an interesting event.',
+        speaker: '大臣',
+        summary: 'この政策は雇用を創出します。',
         response_to: [{
           dialog_id: -1,
           reaction: Reaction.AGREE
@@ -250,44 +231,54 @@ export const articles: Article[] = [
       },
       {
         id: 1,
-        speaker: 'Attendee',
-        summary: 'I enjoyed the event thoroughly.',
+        speaker: '経済学者',
+        summary: '政策には可能性がありますが、詳細を見る必要があります。',
         response_to: [{
           dialog_id: 0,
-          reaction: Reaction.AGREE
+          reaction: Reaction.NEUTRAL
         }]
       },
       {
         id: 2,
-        speaker: 'Organizer',
-        summary: 'We are glad to see such a positive response.',
+        speaker: '野党リーダー',
+        summary: '実施方法に懸念があります。',
         response_to: [{
           dialog_id: 1,
-          reaction: Reaction.AGREE
+          reaction: Reaction.DISAGREE
+        }]
+      },
+      {
+        id: 3,
+        speaker: 'ジャーナリスト',
+        summary: '雇用創出の具体的な詳細を教えていただけますか？',
+        response_to: [{
+          dialog_id: 0,
+          reaction: Reaction.QUESTION
         }]
       }
     ]
   },
   { 
-    title: 'Miscellaneous Headline 3', 
-    id: 5, 
-    date: '2023-10-07', 
-    summary: 'Description for headline 3.', 
-    description: 'Description for headline 3.', 
-    category: 'Miscellaneous', 
-    keywords: ['miscellaneous', 'headline 3'],
+    title: '金融市場の動向', 
+    id: "3", 
+    date: '2023-10-05', 
+    summary: '市場の動向についての分析が注目されています。', 
+    description: '市場の動向についての分析が注目されています。', 
+    category: '金融', 
+    keywords: ['金融', '市場', '分析'],
     participants: [
-      { name: 'Witness', summary: 'I saw it happen.' },
-      { name: 'Reporter', summary: 'Can you describe what you saw?' }
+      { name: 'アナリスト', summary: '市場は現在不安定です。' },
+      { name: '投資家', summary: '今は慎重に投資を進めています。' },
+      { name: 'ファイナンシャルアドバイザー', summary: 'このような時期には分散投資が鍵です。' }
     ],
     terms: [
-      { term: 'miscellaneous', definition: 'Various types or from different sources.' }
+      { term: '金融', definition: '特に政府や大企業による大量の資金の管理。' }
     ],
     dialogs: [
       {
         id: 0,
-        speaker: 'Witness',
-        summary: 'I saw it happen.',
+        speaker: 'アナリスト',
+        summary: '市場は現在不安定です。',
         response_to: [{
           dialog_id: -1,
           reaction: Reaction.NEUTRAL
@@ -295,55 +286,8 @@ export const articles: Article[] = [
       },
       {
         id: 1,
-        speaker: 'Reporter',
-        summary: 'Can you describe what you saw?',
-        response_to: [{
-          dialog_id: 0,
-          reaction: Reaction.NEUTRAL
-        }]
-      },
-      {
-        id: 2,
-        speaker: 'Witness',
-        summary: 'It was a chaotic scene.',
-        response_to: [{
-          dialog_id: 1,
-          reaction: Reaction.NEUTRAL
-        }]
-      }
-    ]
-  },
-  { 
-    title: 'Technology Breakthrough', 
-    id: 6, 
-    date: '2023-10-08', 
-    summary: 'A new technology breakthrough has been announced.', 
-    description: 'A new technology breakthrough has been announced.', 
-    category: 'Technology', 
-    keywords: ['technology', 'breakthrough'],
-    participants: [
-      { name: 'Scientist', summary: 'This will change the world.' },
-      { name: 'Engineer', summary: 'The applications are endless.' },
-      { name: 'Investor', summary: 'We are excited to see the potential.' }
-    ],
-    terms: [
-      { term: 'technology', definition: 'The application of scientific knowledge for practical purposes, especially in industry.' },
-      { term: 'breakthrough', definition: 'A sudden, dramatic, and important discovery or development.' }
-    ],
-    dialogs: [
-      {
-        id: 0,
-        speaker: 'Scientist',
-        summary: 'This will change the world.',
-        response_to: [{
-          dialog_id: -1,
-          reaction: Reaction.AGREE
-        }]
-      },
-      {
-        id: 1,
-        speaker: 'Engineer',
-        summary: 'The applications are endless.',
+        speaker: '投資家',
+        summary: '今は慎重に投資を進めています。',
         response_to: [{
           dialog_id: 0,
           reaction: Reaction.AGREE
@@ -351,240 +295,13 @@ export const articles: Article[] = [
       },
       {
         id: 2,
-        speaker: 'Investor',
-        summary: 'We are excited to see the potential.',
+        speaker: 'ファイナンシャルアドバイザー',
+        summary: 'このような時期には分散投資が鍵です。',
         response_to: [{
           dialog_id: 1,
           reaction: Reaction.AGREE
         }]
       }
     ]
-  },
-  { 
-    title: 'Health Update', 
-    id: 7, 
-    date: '2023-10-09', 
-    summary: 'New health guidelines have been released.', 
-    description: 'New health guidelines have been released.', 
-    category: 'Health', 
-    keywords: ['health', 'guidelines'],
-    participants: [
-      { name: 'Doctor', summary: 'Follow these guidelines for better health.' },
-      { name: 'Patient', summary: 'How will these guidelines help?' }
-    ],
-    terms: [
-      { term: 'health', definition: 'The state of being free from illness or injury.' },
-      { term: 'guidelines', definition: 'A general rule, principle, or piece of advice.' }
-    ],
-    dialogs: [
-      {
-        id: 0,
-        speaker: 'Doctor',
-        summary: 'Follow these guidelines for better health.',
-        response_to: [{
-          dialog_id: -1,
-          reaction: Reaction.AGREE
-        }]
-      },
-      {
-        id: 1,
-        speaker: 'Patient',
-        summary: 'How will these guidelines help?',
-        response_to: [{
-          dialog_id: 0,
-          reaction: Reaction.NEUTRAL
-        }]
-      },
-      {
-        id: 2,
-        speaker: 'Doctor',
-        summary: 'They are based on the latest research.',
-        response_to: [{
-          dialog_id: 1,
-          reaction: Reaction.AGREE
-        }]
-      }
-    ]
-  },
-  { 
-    title: 'Entertainment News', 
-    id: 8, 
-    date: '2023-10-10', 
-    summary: 'A new movie has broken box office records.', 
-    description: 'A new movie has broken box office records.', 
-    category: 'Entertainment', 
-    keywords: ['entertainment', 'movie', 'box office'],
-    participants: [
-      { name: 'Director', summary: 'We are thrilled with the success.' },
-      { name: 'Actor', summary: 'The audience response has been amazing.' },
-      { name: 'Critic', summary: 'The movie is a masterpiece.' }
-    ],
-    terms: [
-      { term: 'box office', definition: 'The place where tickets are sold in a theater or cinema.' }
-    ],
-    dialogs: [
-      {
-        id: 0,
-        speaker: 'Director',
-        summary: 'We are thrilled with the success.',
-        response_to: [{
-          dialog_id: -1,
-          reaction: Reaction.AGREE
-        }]
-      },
-      {
-        id: 1,
-        speaker: 'Actor',
-        summary: 'The audience response has been amazing.',
-        response_to: [{
-          dialog_id: 0,
-          reaction: Reaction.AGREE
-        }]
-      },
-      {
-        id: 2,
-        speaker: 'Critic',
-        summary: 'The movie is a masterpiece.',
-        response_to: [{
-          dialog_id: 1,
-          reaction: Reaction.AGREE
-        }]
-      }
-    ]
-  },
-  { 
-    title: 'Weather Alert', 
-    id: 9, 
-    date: '2023-10-11', 
-    summary: 'A severe weather alert has been issued.', 
-    description: 'A severe weather alert has been issued.', 
-    category: 'Weather', 
-    keywords: ['weather', 'alert'],
-    participants: [
-      { name: 'Meteorologist', summary: 'Take precautions.' },
-      { name: 'Resident', summary: 'What areas will be affected?' }
-    ],
-    terms: [
-      { term: 'alert', definition: 'A warning of danger or a problem.' }
-    ],
-    dialogs: [
-      {
-        id: 0,
-        speaker: 'Meteorologist',
-        summary: 'Take precautions.',
-        response_to: [{
-          dialog_id: -1,
-          reaction: Reaction.AGREE
-        }]
-      },
-      {
-        id: 1,
-        speaker: 'Resident',
-        summary: 'What areas will be affected?',
-        response_to: [{
-          dialog_id: 0,
-          reaction: Reaction.NEUTRAL
-        }]
-      },
-      {
-        id: 2,
-        speaker: 'Meteorologist',
-        summary: 'The entire region is at risk.',
-        response_to: [{
-          dialog_id: 1,
-          reaction: Reaction.AGREE
-        }]
-      }
-    ]
-  },
-  { 
-    title: 'Travel Advisory', 
-    id: 10, 
-    date: '2023-10-12', 
-    summary: 'A new travel advisory has been issued.', 
-    description: 'A new travel advisory has been issued.', 
-    category: 'Travel', 
-    keywords: ['travel', 'advisory'],
-    participants: [
-      { name: 'Travel Agent', summary: 'Check the advisory before traveling.' },
-      { name: 'Traveler', summary: 'What are the main concerns?' }
-    ],
-    terms: [
-      { term: 'advisory', definition: 'An official announcement or warning.' }
-    ],
-    dialogs: [
-      {
-        id: 0,
-        speaker: 'Travel Agent',
-        summary: 'Check the advisory before traveling.',
-        response_to: [{
-          dialog_id: -1,
-          reaction: Reaction.NEUTRAL
-        }]
-      },
-      {
-        id: 1,
-        speaker: 'Traveler',
-        summary: 'What are the main concerns?',
-        response_to: [{
-          dialog_id: 0,
-          reaction: Reaction.NEUTRAL
-        }]
-      },
-      {
-        id: 2,
-        speaker: 'Travel Agent',
-        summary: 'There are safety and health concerns.',
-        response_to: [{
-          dialog_id: 1,
-          reaction: Reaction.NEUTRAL
-        }]
-      }
-    ]
-  },
-  { 
-    title: 'Local Event', 
-    id: 11, 
-    date: '2023-10-13', 
-    summary: 'A local event is happening this weekend.', 
-    description: 'A local event is happening this weekend.', 
-    category: 'Local', 
-    keywords: ['local', 'event'],
-    participants: [
-      { name: 'Organizer', summary: 'Join us for a fun weekend.' },
-      { name: 'Attendee', summary: 'What activities are planned?' }
-    ],
-    terms: [
-      { term: 'event', definition: 'A planned public or social occasion.' }
-    ],
-    dialogs: [
-      {
-        id: 0,
-        speaker: 'Organizer',
-        summary: 'Join us for a fun weekend.',
-        response_to: [{
-          dialog_id: -1,
-          reaction: Reaction.AGREE
-        }]
-      },
-      {
-        id: 1,
-        speaker: 'Attendee',
-        summary: 'What activities are planned?',
-        response_to: [{
-          dialog_id: 0,
-          reaction: Reaction.NEUTRAL
-        }]
-      },
-      {
-        id: 2,
-        speaker: 'Organizer',
-        summary: 'There will be games, food, and music.',
-        response_to: [{
-          dialog_id: 1,
-          reaction: Reaction.AGREE
-        }]
-      }
-    ]
-  },
+  }
 ];

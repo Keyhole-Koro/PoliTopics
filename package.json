@@ -1,11 +1,13 @@
 {
-  "name": "news-api",
+  "name": "politopics",
   "version": "1.0.0",
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
     "test": "jest",
-    "start": "ts-node src/index.ts"
+    "build:ingestor": "esbuild src/lambdas/ingestor/app.ts --bundle --platform=node --target=node18 --outfile=dist/ingestor/app.js",
+    "build:provider": "esbuild src/lambdas/provider/app.ts --bundle --platform=node --target=node18 --outfile=dist/provider/app.js",
+    "build:all": "npm run build:ingestor && npm run build:provider"
   },
   "keywords": [],
   "author": "",
@@ -13,13 +15,17 @@
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.705.0",
     "@aws-sdk/lib-dynamodb": "^3.705.0",
+    "@google/generative-ai": "^0.24.0",
+    "@types/aws-lambda": "^8.10.147",
     "@types/express": "^5.0.0",
+    "@types/winston": "^2.4.4",
     "aws-sdk": "^2.1692.0",
     "axios": "^1.7.8",
     "cors": "^2.8.5",
     "express": "^4.21.1",
     "module-alias": "^2.2.3",
-    "tsconfig-paths": "^4.2.0"
+    "tsconfig-paths": "^4.2.0",
+    "winston": "^3.17.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",

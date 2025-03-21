@@ -12,6 +12,9 @@ https://chiholog.net
 User-Agent: * Allow: / User-agent: bingbot Crawl-Delay: 30 Sitemap: https://chiholog.net/sitemap.xml
 ```
 
+### members table
+https://www.shugiin.go.jp/internet/itdb_annai.nsf/html/statics/syu/1giin.htm
+
 ## Tech stacks
 #### System
 Node.js

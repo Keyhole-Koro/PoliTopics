@@ -22,7 +22,7 @@ export interface Term {
 }
 
 export interface Dialog {
-  id: number;
+  order: number;
   speaker: string;
   summary: string;
   response_to: ResponseTo[];
@@ -59,7 +59,7 @@ export const convertDynamoDBItemToArticle = (item: any): Article => {
       definition: term.M.definition.S,
     })) as Term[],
     dialogs: item.dialogs.L.map((dialog: any) => ({
-      id: parseInt(dialog.M.id.N),
+      order: parseInt(dialog.M.order.N),
       speaker: dialog.M.speaker.S,
       summary: dialog.M.summary.S,
       response_to: dialog.M.response_to.L.map((response: any) => ({

@@ -14,17 +14,15 @@ export class DynamoDBHandler {
   private readonly KEYWORD_TABLE_NAME = "KeywordArticleIds";
   private readonly PARTICIPANT_TABLE_NAME = "ParticipantArticleIds";
   private readonly REGION = "us-east-1";
-  private readonly ACCESS_KEY_ID = "local";
-  private readonly SECRET_ACCESS_KEY = "local";
   private readonly DateIndex = "DateIndex";
 
-  constructor() {
+  constructor(endpoint: string, access_key_id: string, secret_access_key: string) {
     this.client = new DynamoDBClient({
       region: this.REGION,
-      endpoint: "http://localhost:8000",
+      endpoint: endpoint,
       credentials: {
-        accessKeyId: this.ACCESS_KEY_ID,
-        secretAccessKey: this.SECRET_ACCESS_KEY,
+        accessKeyId: access_key_id,
+        secretAccessKey: secret_access_key,
       },
     });
     this.ddbDocClient = DynamoDBDocumentClient.from(this.client);
@@ -77,7 +75,7 @@ export class DynamoDBHandler {
         dialogs: {
           L: article.dialogs.map((dialog) => ({
             M: {
-              id: { N: dialog.id.toString() },
+              order: { N: dialog.order.toString() },
               speaker: { S: dialog.speaker },
               summary: { S: dialog.summary },
               response_to: {

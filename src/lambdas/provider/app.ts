@@ -1,11 +1,17 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
-import { DynamoDBHandler } from './DynamoDBHandler/dynamodb';
-import { convertDynamoDBItemToArticle } from './interfaces/Article';
+import { DynamoDBHandler } from '@DynamoDBHandler/dynamodb';
+import { convertDynamoDBItemToArticle } from '@interfaces/Article';
+
 const app = express();
 const PORT = 5000;
 
-const ddbHandler = new DynamoDBHandler();
+const ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID || "local";
+const SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY || "local";
+
+const DDB_ENDPOINT = process.env.AWS_DYNAMODB_ENDPOINT || "http://localhost:8000";
+
+const ddbHandler = new DynamoDBHandler(DDB_ENDPOINT, ACCESS_KEY_ID, SECRET_ACCESS_KEY);
 
 app.use(cors());
 

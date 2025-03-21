@@ -17,6 +17,7 @@
       "@DynamoDBHandler/*": ["DynamoDBHandler/*"],
       "@GeminiHandler/*": ["GeminiHandler/*"],
       "@NationalDietAPIHandler/*": ["NationalDietAPIHandler/*"],
+      "@services/*": ["services/*"],
       "@utils/*": ["utils/*"]
     },
   },

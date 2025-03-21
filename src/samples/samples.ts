@@ -1,4 +1,4 @@
-import { Article, Reaction } from '../interfaces/Article';
+import { Article, Reaction } from '@interfaces/Article';
 
 
 export const articles2: Article[] = [
@@ -20,7 +20,7 @@ export const articles2: Article[] = [
     ],
     dialogs: [
       {
-        id: 0,
+        order: 0,
         speaker: 'コーチ',
         summary: '最高の試合をしました。',
         response_to: [{
@@ -29,7 +29,7 @@ export const articles2: Article[] = [
         }]
       },
       {
-        id: 1,
+        order: 1,
         speaker: '選手',
         summary: '厳しい試合でしたが全力を尽くしました。',
         response_to: [{
@@ -38,7 +38,7 @@ export const articles2: Article[] = [
         }]
       },
       {
-        id: 2,
+        order: 2,
         speaker: 'ファン',
         summary: '会場の雰囲気が最高でした！',
         response_to: [{
@@ -68,7 +68,7 @@ export const articles2: Article[] = [
     ],
     dialogs: [
       {
-        id: 0,
+        order: 0,
         speaker: '大臣',
         summary: 'この政策は雇用を創出します。',
         response_to: [{
@@ -77,7 +77,7 @@ export const articles2: Article[] = [
         }]
       },
       {
-        id: 1,
+        order: 1,
         speaker: '経済学者',
         summary: '政策には可能性がありますが、詳細を見る必要があります。',
         response_to: [{
@@ -86,7 +86,7 @@ export const articles2: Article[] = [
         }]
       },
       {
-        id: 2,
+        order: 2,
         speaker: '野党リーダー',
         summary: '実施方法に懸念があります。',
         response_to: [{
@@ -95,7 +95,7 @@ export const articles2: Article[] = [
         }]
       },
       {
-        id: 3,
+        order: 3,
         speaker: 'ジャーナリスト',
         summary: '雇用創出の具体的な詳細を教えていただけますか？',
         response_to: [{
@@ -123,7 +123,7 @@ export const articles2: Article[] = [
     ],
     dialogs: [
       {
-        id: 0,
+        order: 0,
         speaker: 'アナリスト',
         summary: '市場は現在不安定です。',
         response_to: [{
@@ -132,7 +132,7 @@ export const articles2: Article[] = [
         }]
       },
       {
-        id: 1,
+        order: 1,
         speaker: '投資家',
         summary: '今は慎重に投資を進めています。',
         response_to: [{
@@ -141,7 +141,7 @@ export const articles2: Article[] = [
         }]
       },
       {
-        id: 2,
+        order: 2,
         speaker: 'ファイナンシャルアドバイザー',
         summary: 'このような時期には分散投資が鍵です。',
         response_to: [{
@@ -173,7 +173,7 @@ export const articles = [
     ],
     dialogs: [
       {
-        id: 0,
+        order: 0,
         speaker: 'コーチ',
         summary: '最高の試合をしました。',
         response_to: [{
@@ -182,7 +182,7 @@ export const articles = [
         }]
       },
       {
-        id: 1,
+        order: 1,
         speaker: '選手',
         summary: '厳しい試合でしたが全力を尽くしました。',
         response_to: [{
@@ -191,7 +191,7 @@ export const articles = [
         }]
       },
       {
-        id: 2,
+        order: 2,
         speaker: 'ファン',
         summary: '会場の雰囲気が最高でした！',
         response_to: [{
@@ -221,7 +221,7 @@ export const articles = [
     ],
     dialogs: [
       {
-        id: 0,
+        order: 0,
         speaker: '大臣',
         summary: 'この政策は雇用を創出します。',
         response_to: [{
@@ -230,7 +230,7 @@ export const articles = [
         }]
       },
       {
-        id: 1,
+        order: 1,
         speaker: '経済学者',
         summary: '政策には可能性がありますが、詳細を見る必要があります。',
         response_to: [{
@@ -239,7 +239,7 @@ export const articles = [
         }]
       },
       {
-        id: 2,
+        order: 2,
         speaker: '野党リーダー',
         summary: '実施方法に懸念があります。',
         response_to: [{
@@ -248,7 +248,7 @@ export const articles = [
         }]
       },
       {
-        id: 3,
+        order: 3,
         speaker: 'ジャーナリスト',
         summary: '雇用創出の具体的な詳細を教えていただけますか？',
         response_to: [{
@@ -276,7 +276,7 @@ export const articles = [
     ],
     dialogs: [
       {
-        id: 0,
+        order: 0,
         speaker: 'アナリスト',
         summary: '市場は現在不安定です。',
         response_to: [{
@@ -285,7 +285,7 @@ export const articles = [
         }]
       },
       {
-        id: 1,
+        order: 1,
         speaker: '投資家',
         summary: '今は慎重に投資を進めています。',
         response_to: [{
@@ -294,7 +294,7 @@ export const articles = [
         }]
       },
       {
-        id: 2,
+        order: 2,
         speaker: 'ファイナンシャルアドバイザー',
         summary: 'このような時期には分散投資が鍵です。',
         response_to: [{

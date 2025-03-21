@@ -1,5 +1,4 @@
 import { GoogleGenerativeAI, GenerativeModel } from "@google/generative-ai";
-import { GoogleAIFileManager } from "@google/generative-ai/server";
 
 // Define return type for the generateSummaryFromPDF function
 type GenerateSummaryResult = Promise<string>;
@@ -7,7 +6,7 @@ type GenerateSummaryResult = Promise<string>;
 /**
  * Generates a summary from a given PDF file using Google Generative AI.
  *
- * @param modelName - The Gemini model to use (e.g., "gemini-1.5-flash").
+ * @param apiKey - API key for the Google Generative AI.
  * @param promptText - Text prompt for the content generation.
  * @returns The generated summary as a promise that resolves to a string.
  */

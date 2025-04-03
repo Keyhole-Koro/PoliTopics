@@ -82,35 +82,4 @@ export default class SpeechFormatter {
             };
         }
     }
-
-    public async processFile(inputFile: string, outputDir: string): Promise<boolean> {
-        try {
-            const jsonData = JSON.parse(await fs.readFile(inputFile, 'utf-8')) as RawData;
-            const result = this.processData(jsonData);
-
-            if (!result.success || !result.data) {
-                throw new Error(result.error || 'Processing failed');
-            }
-
-            await fs.mkdir(outputDir, { recursive: true });
-
-            for (const [issueId, issueData] of Object.entries(result.data)) {
-                const outputFile = path.join(outputDir, `${issueId}_formatted.json`);
-                
-                let finalData = issueData;
-                if (await fs.access(outputFile).then(() => true).catch(() => false)) {
-                    const existingData = JSON.parse(await fs.readFile(outputFile, 'utf-8')) as ProcessedIssue;
-                    const speechMap = new Map(existingData.speeches.map(s => [s.speechOrder, s]));
-                    issueData.speeches.forEach(s => speechMap.set(s.speechOrder, s));
-                    finalData.speeches = Array.from(speechMap.values()).sort((a, b) => a.speechOrder - b.speechOrder);
-                }
-
-                await fs.writeFile(outputFile, JSON.stringify(finalData, null, 2));
-            }
-
-            return true;
-        } catch (e) {
-            return false;
-        }
-    }
 }

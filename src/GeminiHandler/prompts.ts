@@ -40,3 +40,7 @@ export const output_format = `### フォーマット
   }
 
 `;
+
+export const compose_prompt = (dialog: string): string => {
+  return `${instruction}${dialog}${output_format}`;
+}

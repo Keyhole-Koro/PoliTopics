@@ -1,14 +1,37 @@
+import e from "express";
+
+type markdown = string;
+
 export interface Article {
-  id: string;
+  issueID: string;
   title: string;
   date: string;
+
+  imageKind: string;
+  session: number;
+  nameOfHouse: string;
+  nameOfMeeting: string;
+
+  summary: Summary;
+  middle_summary: MiddleSummary[];
   category: string;
-  summary: string;
   description: string;
   dialogs: Dialog[];
   participants: Participant[];
   keywords: string[];
   terms: Term[];
+}
+
+export interface Summary {
+  id: number;
+  summary: string;
+  figure: markdown;
+}
+
+export interface MiddleSummary {
+  order: number;
+  summary: string;
+  figure: markdown;
 }
 
 export interface Participant {
@@ -24,13 +47,12 @@ export interface Term {
 export interface Dialog {
   order: number;
   speaker: string;
+  speaker_yomi: string;
+  speaker_group: string;
+  speaker_position: string;
+  speaker_role: string;
   summary: string;
   response_to: ResponseTo[];
-}
-
-export interface ResponseTo {
-  dialog_id: number;
-  reaction: Reaction;
 }
 
 export enum Reaction {

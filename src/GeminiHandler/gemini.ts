@@ -11,7 +11,7 @@ type GenerateSummaryResult = Promise<string>;
  * @returns The generated summary as a promise that resolves to a string.
  */
 
-async function generateSummary(
+async function geminiAPI(
   apiKey: string,
   promptText: string
 ): GenerateSummaryResult {
@@ -35,5 +35,5 @@ async function generateSummary(
   }
 }
 
-export default generateSummary;
+export default geminiAPI;
 

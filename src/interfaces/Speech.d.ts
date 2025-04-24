@@ -8,7 +8,7 @@ export interface Speech {
     speech: string;
 }
 
-export interface ProcessedIssue {
+export interface MapIssue {
     imageKind: string;
     session: number;
     nameOfHouse: string;

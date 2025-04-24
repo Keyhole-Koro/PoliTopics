@@ -1,17 +1,4 @@
-import { RawData, RawSpeech, Speech, ProcessedIssue } from '@interfaces/Speech';
-import fs from 'fs/promises';
-import path from 'path';
-import winston from 'winston';
-
-export interface ProcessResult {
-    success: boolean;
-    data?: Record<string, ProcessedIssue>;
-    error?: string;
-    stats?: {
-        total_issues: number;
-        total_speeches: number;
-    };
-}
+import { RawData, RawSpeech, Speech, MapIssue } from '@interfaces/Speech';
 
 export default class SpeechFormatter {
 
@@ -19,7 +6,7 @@ export default class SpeechFormatter {
         return text.replace(/\r\n/g, '\n').replace(/\u3000/g, ' ');
     }
 
-    private formatIssueData(speeches: RawSpeech[]): ProcessedIssue | null {
+    private formatIssueData(speeches: RawSpeech[]): MapIssue | null {
         if (!speeches.length) return null;
 
         const firstSpeech = speeches[0];
@@ -43,7 +30,7 @@ export default class SpeechFormatter {
         };
     }
 
-    private groupSpeechesByIssue(data: RawData): Record<string, ProcessedIssue> {
+    private groupSpeechesByIssue(data: RawData): Record<string, MapIssue> {
         const speechesByIssue = new Map<string, RawSpeech[]>();
 
         data.speechRecord.forEach(speech => {
@@ -52,7 +39,7 @@ export default class SpeechFormatter {
             speechesByIssue.set(speech.issueID, speeches);
         });
 
-        const result: Record<string, ProcessedIssue> = {};
+        const result: Record<string, MapIssue> = {};
         for (const [issueId, speeches] of speechesByIssue) {
             const formatted = this.formatIssueData(speeches);
             if (formatted) {
@@ -63,23 +50,15 @@ export default class SpeechFormatter {
         return result;
     }
 
-    public processData(jsonData: RawData): ProcessResult {
-        try {
-            const formattedData = this.groupSpeechesByIssue(jsonData);
-            return {
-                success: true,
-                data: formattedData,
-                stats: {
-                    total_issues: Object.keys(formattedData).length,
-                    total_speeches: Object.values(formattedData)
-                        .reduce((sum, issue) => sum + issue.speeches.length, 0)
-                }
-            };
-        } catch (e) {
-            return {
-                success: false,
-                error: e instanceof Error ? e.message : 'Unknown error'
-            };
-        }
+    public mapRecords(jsonRecords: RawData): Record<string, MapIssue> {
+        return this.groupSpeechesByIssue(jsonRecords);
+    }
+
+    public getStats(data: Record<string, MapIssue>) {
+        return {
+            totalIssues: Object.keys(data).length,
+            totalSpeeches: Object.values(data)
+                .reduce((sum, issue) => sum + issue.speeches.length, 0)
+        };
     }
 }

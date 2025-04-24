@@ -3,19 +3,18 @@ import e from "express";
 type markdown = string;
 
 export interface Article {
-  issueID: string;
-  title: string;
-  date: string;
-
-  imageKind: string;
-  session: number;
-  nameOfHouse: string;
-  nameOfMeeting: string;
-
+  issueID: string,
+  title: string,
+  date: string,
+  imageKind: string,
+  session: number,
+  nameOfHouse: string,
+  nameOfMeeting: string,
+  category: string,
+  description: string
+  
   summary: Summary;
   middle_summary: MiddleSummary[];
-  category: string;
-  description: string;
   dialogs: Dialog[];
   participants: Participant[];
   keywords: string[];

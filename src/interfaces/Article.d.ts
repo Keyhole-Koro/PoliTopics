@@ -47,7 +47,6 @@ export interface Term {
 export interface Dialog {
   order: number;
   speaker: string;
-  speaker_yomi: string;
   speaker_group: string;
   speaker_position: string;
   speaker_role: string;

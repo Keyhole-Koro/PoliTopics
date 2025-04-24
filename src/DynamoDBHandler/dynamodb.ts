@@ -52,12 +52,12 @@ export class DynamoDBHandler {
     console.log("Article added successfully.");
 
     for (const keyword of news.keywords) {
-      await this.addKeyword(keyword, news.id.toString());
+      await this.addKeyword(keyword, news.issueID.toString());
     }
     console.log("Keywords added successfully.");
 
     for (const participant of news.participants) {
-      await this.addParticipant(participant.name, news.id.toString());
+      await this.addParticipant(participant.name, news.issueID.toString());
     }
     console.log("Participants added successfully.");
   }
@@ -66,11 +66,11 @@ export class DynamoDBHandler {
     const command = new PutItemCommand({
       TableName: this.ARTICLE_TABLE_NAME,
       Item: {
-        id: { S: article.id },
+        id: { S: article.issueID },
         title: { S: article.title },
         date: { S: article.date },
         category: { S: article.category },
-        summary: { S: article.summary },
+        summary: { S: article.summary.summary },
         description: { S: article.description },
         dialogs: {
           L: article.dialogs.map((dialog) => ({

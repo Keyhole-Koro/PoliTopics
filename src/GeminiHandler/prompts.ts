@@ -1,46 +1,69 @@
-import * as fs from 'fs';
+export const instruction = `以下の会話内容を基に、次の形式で要約データを構成してください：
 
-export const instruction = `以下の会話内容について、次の形式で要約してください：
-
-1. **全体の要約**：会話全体の要旨と結論を短くまとめてください。
-2. **発言ごとの要約**：各発言の要点を簡潔に記載し、依存関係（質問と回答、主張と反論など）が分かるようにしてください。
+1. **全体の要約**（Summary）：会話全体の要点と結論を簡潔に記述してください。
+2. **中間要約**（MiddleSummary）：議論の重要な段階ごとに、要点をまとめてください。
+3. **発言ごとの要約**（Dialog）：発言の主旨、話者、発言順序、関連する発言（応答元）を記載してください。
+4. **参加者情報**（Participant）：主要な話者とその役割、発言の要旨をまとめてください。
+5. **用語の解説**（Term）：一般人には分かりにくい専門用語をリストアップし、簡潔に解説してください。
+6. **キーワード抽出**（Keyword）：議論の焦点となるキーワードを優先度付きで抽出してください。
 
 `;
 
-export const output_format = `### フォーマット
+export const output_format = `### 出力フォーマット
 
 {
-  "overall_summary": "ここに全体の要約を記載してください。",
-  "individual_summaries": [
+  "summary": {
+    "id": 1,
+    "summary": "会話全体の要約をここに記載",
+    "figure": "Markdown形式で図や補足を記載（任意）"
+  },
+  "middle_summary": [
     {
-      "id": 発言ID,
-      "speaker": "発言者名",
-      "summary": "発言内容の要約",
-      "response_to": {
-        "id": 応答先の発言ID,
-        "reaction": "肯定ならagree、否定ならdisagree、中立ならnutral"
-        }
+      "order": 1,
+      "summary": "中間要約1",
+      "figure": "Markdown形式（任意）"
     },
     ...
+  ],
+  "dialogs": [
+    {
+      "order": 1,
+      "speaker": "発言者名",
+      "speaker_group": "所属",
+      "speaker_position": "役職",
+      "speaker_role": "役割",
+      "summary": "発言内容の要約",
+      "response_to": [
+        {
+          "id": 発言ID,
+          "reaction": "agree | disagree | neutral | question | answer"
+        }
+      ]
+    },
+    ...
+  ],
+  "participants": [
+    {
+      "name": "話者名",
+      "summary": "この人の発言要旨"
+    }
+  ],
+  "terms": [
+    {
+      "term": "専門用語",
+      "definition": "その説明"
+    }
+  ],
+  "keywords": [
+    {
+      "keyword": "キーワード",
+      "priority": "high | medium | low"
+    }
   ]
 }
-
-  また、一般人にはわかりにくい専門用語や略語は、以下のフォーマットで解説してください。
-  {
-    "term": "専門用語",
-    "explanation": "専門用語の説明"
-  }
-
-
-  会話中から、キーワードを抜き出して、以下のフォーマットで記載してください。
-  専門性や重要なキーワードを優先順位をつけて記載してください。
-  {
-    "keyword": "キーワード",
-    "priority": "high, medium, low"
-  }
-
 `;
 
-export const compose_prompt = (dialog: string): string => {
-  return `${instruction}${dialog}${output_format}`;
+
+export const compose_prompt = (content: string): string => {
+  return `${instruction}${content}${output_format}`;
 }

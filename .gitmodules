@@ -1,0 +1,9 @@
+[submodule "PoliTopicsWeb"]
+	path = PoliTopicsWeb
+	url = https://github.com/Keyhole-Koro/PoliTopicsWeb.git
+[submodule "PoliTopicsRecap"]
+	path = PoliTopicsRecap
+	url = https://github.com/Keyhole-Koro/PoliTopicsRecap.git
+[submodule "PoliTopicsDataCollection"]
+	path = PoliTopicsDataCollection
+	url = https://github.com/Keyhole-Koro/PoliTopicsDataCollection.git

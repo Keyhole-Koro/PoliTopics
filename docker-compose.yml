@@ -1,0 +1,52 @@
+version: "3.9"
+
+services:
+  workspace:
+    image: mcr.microsoft.com/devcontainers/base:jammy
+    command: sleep infinity
+    working_dir: /workspaces/PoliTopics
+    volumes:
+      - ./:/workspaces/PoliTopics
+    environment:
+      AWS_REGION: ap-northeast-3
+      AWS_DEFAULT_REGION: ap-northeast-3
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
+      AWS_ENDPOINT_URL: http://localstack:4566
+      LOCALSTACK_URL: http://localstack:4566
+      POLITOPICS_TABLE: politopics-localstack
+      POLITOPICS_ARTICLE_BUCKET: politopics-articles-local
+      LLM_TASK_TABLE: politopics-llm-tasks-local
+      ERROR_BUCKET: politopics-data-collection-errors-local
+      RUN_API_KEY: local-dev
+    depends_on:
+      - localstack
+
+  localstack:
+    image: localstack/localstack:3.8
+    ports:
+      - "4570:4566"
+    environment:
+      - SERVICES=lambda,apigateway,dynamodb,s3,sqs,events,cloudwatch,logs,iam,sts,scheduler
+      - AWS_DEFAULT_REGION=ap-northeast-3
+      - DEFAULT_REGION=ap-northeast-3
+      - DEBUG=0
+      - LS_LOG=warning
+    volumes:
+      - "localstack-data:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+
+  dynamodb-admin:
+    image: aaronshaf/dynamodb-admin:latest
+    environment:
+      - DYNAMO_ENDPOINT=http://localstack:4566
+      - AWS_REGION=ap-northeast-3
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+    ports:
+      - "8009:8001"
+    depends_on:
+      - localstack
+
+volumes:
+  localstack-data:

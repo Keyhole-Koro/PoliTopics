@@ -69,12 +69,10 @@ for gitdir in "${repos[@]}"; do
     continue
   fi
 
-  if $stage_all; then
-    if $dry_run; then
-      echo "  [dry-run] git add -A"
-    else
-      git -C "$repo_dir" add -A
-    fi
+  if $dry_run; then
+    echo "  [dry-run] git add -A"
+  else
+    git -C "$repo_dir" add -A
   fi
 
   if git -C "$repo_dir" diff --cached --quiet; then

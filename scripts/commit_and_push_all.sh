@@ -53,7 +53,7 @@ if [[ -z "$commit_message" ]]; then
   exit 1
 fi
 
-mapfile -d '' repos < <(find . -name .git -type d -print0)
+mapfile -d '' repos < <(find . -name .git -print0)
 if [[ ${#repos[@]} -eq 0 ]]; then
   echo "No git repositories found."
   exit 0
@@ -61,6 +61,11 @@ fi
 
 for gitdir in "${repos[@]}"; do
   repo_dir="${gitdir%/.git}"
+  if ! git -C "$repo_dir" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    echo "==> ${repo_dir}"
+    echo "  not a git repo, skip"
+    continue
+  fi
   echo "==> ${repo_dir}"
 
   status=$(git -C "$repo_dir" status --porcelain)

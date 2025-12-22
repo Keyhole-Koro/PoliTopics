@@ -72,7 +72,7 @@
     - `GSI2PK`: `Y#YYYY#M#MM`, `GSI2SK`: `<ISO-UTC date>`
     - Key fields: `title`, `date`, `month`, `imageKind`, `session`, `nameOfHouse`, `nameOfMeeting`,
       `categories`, `description`, `participants`, `keywords`, `terms`, etc.
-    - `summary`, `soft_summary`, `middle_summary`, `dialogs` are stored in S3 and referenced via `payload_url`.
+    - `summary`, `soft_language_summary`, `middle_summary`, `dialogs` are stored in S3 and referenced via `payload_url`.
   - Thin index items (list/search)
     - `PK`: `CATEGORY#<name>` / `PERSON#<name>` / `KEYWORD#<kw>` / `IMAGEKIND#<kind>` /
       `SESSION#<session>` / `HOUSE#<house>` / `MEETING#<meeting>`

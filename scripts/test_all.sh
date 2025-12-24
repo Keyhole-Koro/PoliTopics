@@ -5,16 +5,17 @@ set -e
 DIRECTORIES=("PoliTopicsDataCollection" "PoliTopicsRecap" "PoliTopicsWeb")
 
 # Store the root directory
-ROOT_DIR=$(pwd)
+# The script is in /scripts, so the root is two levels up
+ROOT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 
 echo "Starting tests for all submodules..."
 
 for dir in "${DIRECTORIES[@]}"; do
-  if [ -d "$dir" ]; then
+  if [ -d "$ROOT_DIR/$dir" ]; then
     echo "--------------------------------------------------"
     echo "Running tests in $dir..."
     echo "--------------------------------------------------"
-    cd "$dir"
+    cd "$ROOT_DIR/$dir"
     
     # Check if package.json exists
     if [ -f "package.json" ]; then

@@ -70,7 +70,7 @@ run_module() {
 
   run_step "${name}: build" bash -c "$build_cmd"
   run_step "${name}: create state bucket" "$create_state_script" local
-  run_step "${name}: terraform init" terraform -chdir="$tf_dir" init -input=false
+  run_step "${name}: terraform init" terraform -chdir="$tf_dir" init -input=false -reconfigure -backend-config="backends/local.hcl"
   run_step "${name}: import" "$import_script" local
 
   echo

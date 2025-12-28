@@ -48,5 +48,6 @@
     "LLM_TASK_TABLE": "politopics-llm-tasks-local",
     "ERROR_BUCKET": "politopics-data-collection-errors-local",
     "RUN_API_KEY": "local-dev"
-  }
+  },
+  "updateRemoteUserUID": false
 }

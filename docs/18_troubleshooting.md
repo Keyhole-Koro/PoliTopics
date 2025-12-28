@@ -18,6 +18,15 @@
 - Lambda creation fails in LocalStack:
   - Ensure `LAMBDA_EXECUTOR=local` in docker-compose.
 
+## Deploy Manually Issues
+If Terraform init or import unexpectedly targets LocalStack for stage or prod, unset the LocalStack endpoint and ensure real AWS credentials are set:
+
+```bash
+unset AWS_ENDPOINT_URL
+export AWS_ACCESS_KEY_ID="..."
+export AWS_SECRET_ACCESS_KEY="..."
+```
+
 ## API Gateway stage path
 - Web backend Lambda strips `/stage` from paths.
   - If you add new routes, keep this in mind for stage deployments.

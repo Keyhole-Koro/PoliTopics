@@ -9,6 +9,6 @@ Added Discord webhook notifications across DataCollection, Recap, and Web: DataC
 
 Added a real Discord webhook integration test in `PoliTopicsRecap/tests/integration/discordWebhook.integration.test.ts` that loads `DISCORD_WEBHOOK_TEST_URL` from `.test.env`, aggregates missing env errors before failing, and verifies the webhook returns a successful HTTP status. Color constants now include inline comments indicating their hues.
 
-Centralized Discord webhook utilities under the new top-level `common/` package so DataCollection, Recap, and Web backend now import `@common/discord/*` instead of duplicating helpers. Build scripts keep using `tsc`/`tsc-alias`, and common sources stay the single point of truth for webhook payloads, colors, and test env loading. A `.gitignore` entry was added for `common/dist`.
+Centralized Discord webhook utilities into a publishable `@keyhole-koro/politopics-notification` package built to `dist` with exports for the Discord helpers. DataCollection, Recap, and the Web backend now consume the package rather than local path references in `../common`, and corresponding TS references were removed.
 
-Moved the live Discord webhook integration test into `common/tests/discordWebhook.integration.test.ts` so all services share the same validation. Recap Jest now includes the common test root; the per-service copies were removed.
+Moved the live Discord webhook integration test into `common/tests/discordWebhook.integration.test.ts` so all services share the same validation. Recap Jest roots were trimmed now that the shared package is external.

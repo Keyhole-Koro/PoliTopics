@@ -62,6 +62,10 @@ The root repo stitches the three submodules together so they can share a unified
 └── README.md
 ```
 
+## Frontend hosting & deploy
+- Local/localstack: Terraform builds/uploads the SPA to the LocalStack S3 bucket when `frontend_deploy_enabled = true` (see `terraform/tfvars/localstack.tfvars`).
+- Stage/Prod: Terraform no longer uploads the SPA. Deploy via GitHub Actions workflow `.github/workflows/deploy-frontend.yml`, which builds the frontend with `NEXT_PUBLIC_API_BASE_URL` from `terraform output backend_api_url` and syncs to Cloudflare R2 (set the R2 secrets in the repo before running).
+
 ## Agent Guide
 
 See `agent.md` for AI agent rules, LocalStack requirements, and change log expectations.

@@ -1,7 +1,7 @@
 # 9. Local Development Setup
 
 ## Required tools
-- Node.js (18+ for DataCollection, 22+ for Recap, 20/22 for Web backend)
+- Node.js 22+
 - pnpm (Recap, DataCollection)
 - npm (Web workspaces)
 - Docker + Docker Compose (LocalStack)

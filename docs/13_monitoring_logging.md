@@ -4,6 +4,10 @@
 - Lambda logs: CloudWatch log groups for each Lambda function.
 - LocalStack logs: `docker compose logs -f localstack`.
 
+## Latency Logging
+- Web Backend (`/article/:id`): Logs high-resolution timing (hrtime) for total request duration.
+- DynamoDB: Logs `GetCommand` duration, table name, key, and hit status for article lookups to help identify storage bottlenecks.
+
 ## DataCollection run logs
 - When `ERROR_BUCKET` is set, DataCollection writes run summaries to S3:
   - `success/<timestamp>-<uuid>.json`

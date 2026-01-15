@@ -29,6 +29,7 @@ Responses:
 
 ## Web backend API
 Base path is the API Gateway stage root. The Lambda strips `/stage` from the path for stage deployments.
+Interactive Swagger documentation is available at `/docs` (in local/dev environments).
 
 ### GET /healthz
 - Response: `{ "status": "ok" }`
@@ -73,7 +74,7 @@ Response:
 
 ### GET /article/:id
 Response:
-- `200 { "article": { ... } }`
+- `200 { "article": { ..., "assetUrl": "https://..." } }`
 - `404 { "message": "Article not found" }`
 
 ## Auth

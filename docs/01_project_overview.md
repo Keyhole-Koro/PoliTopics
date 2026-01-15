@@ -22,5 +22,6 @@ PoliTopics is a three-part pipeline that turns Japanese National Diet records in
 - Reduce prompt: The final prompt that combines chunk results into an article.
 - Article: The summarized output stored in DynamoDB + S3.
 - Article asset: Large fields (summary, dialogs, etc.) stored in S3 and referenced by URL.
+- Article Asset URL: A short-lived, signed URL used to securely access article assets from the frontend.
 - Thin index: DynamoDB secondary items used for fast list/search by facets.
 - LocalStack: Local AWS emulator used for local development.

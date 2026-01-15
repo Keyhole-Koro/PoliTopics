@@ -1,6 +1,9 @@
 .pnpm-store
 .test.env
 common/dist
+PoliTopicsWeb/cacheCron/dist
 *.tsbuildinfo
 
 node_modules
+
+test-results

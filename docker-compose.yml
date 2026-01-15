@@ -5,6 +5,9 @@ services:
     working_dir: /workspaces/PoliTopics
     volumes:
       - ./:/workspaces/PoliTopics
+    ports:
+      - "3333:3333"
+      - "4000:4000"
     depends_on:
       - localstack
 

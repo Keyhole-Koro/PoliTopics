@@ -12,6 +12,7 @@
 - Run LLM summarization on single-chunk or chunked tasks.
 - Store reduce results in S3.
 - Persist article metadata to DynamoDB and heavy assets to S3.
+- Send notifications via Discord for errors, warnings, and completions.
 
 ### PoliTopicsWeb
 - Show latest articles (headlines).
@@ -29,6 +30,7 @@
 ### Article detail (/article/:id)
 - Fetches article details from `/article/:id`.
 - Shows summary, simplified summary, dialog list, participants, keywords, and terms.
+- Summaries are rendered as Markdown (GFM) to support rich text formatting (lists, links).
 
 ### Not found
 - Any unknown route shows a simple not-found view with a link back to home.

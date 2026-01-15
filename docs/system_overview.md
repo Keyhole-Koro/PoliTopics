@@ -67,7 +67,7 @@
     - `PK`: `A#<id>`
     - `SK`: `META`
     - `type`: `ARTICLE`
-    - `asset_url`: S3 pointer to detailed asset JSON
+    - `asset_url`: S3 pointer to detailed asset JSON (returned as signed URL by API)
     - `GSI1PK`: `ARTICLE`, `GSI1SK`: `<ISO-UTC date>`
     - `GSI2PK`: `Y#YYYY#M#MM`, `GSI2SK`: `<ISO-UTC date>`
     - Key fields: `title`, `date`, `month`, `imageKind`, `session`, `nameOfHouse`, `nameOfMeeting`,
@@ -78,7 +78,7 @@
       `SESSION#<session>` / `HOUSE#<house>` / `MEETING#<meeting>`
     - `SK`: `Y#<YYYY>#M#<MM>#D#<ISO-UTC>#A#<id>`
     - `type`: `THIN_INDEX`
-    - Holds only light fields (title, date, month, imageKind, session, nameOfMeeting, nameOfHouse)
+    - Holds metadata for card rendering: title, date, imageKind, description, categories, keywords, participants.
   - Optional: recent keyword log
     - `PK`: `KEYWORD_RECENT`
     - `SK`: `D#<ISO-UTC>#KW#<keyword>#A#<id>`

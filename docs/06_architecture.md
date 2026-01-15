@@ -6,7 +6,8 @@
 - DynamoDB for task tracking and article storage.
 - S3 for prompt payloads and large article assets.
 - Gemini API for summarization.
-- Next.js for the SPA frontend and Fastify for the backend API.
+- Next.js for the SPA frontend.
+- Fastify for the backend API, with Zod for validation and Swagger/OpenAPI for documentation.
 - Terraform for infrastructure provisioning.
 
 ## Design principles
@@ -18,4 +19,12 @@
 ## Responsibility boundaries
 - DataCollection: fetch, chunk, and enqueue tasks.
 - Recap: consume tasks and produce summarized articles.
-- Web: serve search and article experiences.
+- Web: serve search and article experiences (Frontend hosted on Cloudflare R2 for stage/prod, LocalStack S3 for local).
+
+## Notifications
+- A centralized notification service handles alerts via Discord webhooks.
+- Channels are routed based on severity/type: `#error` (fatal), `#warn` (soft failures), `#batch` (completions), and `#access` (web logs).
+
+## Asset Security
+- Article assets (summaries, dialogs) are stored in S3 and accessed via time-limited presigned URLs.
+- The backend generates these signed URLs on demand, ensuring secure and controlled access to heavy content.

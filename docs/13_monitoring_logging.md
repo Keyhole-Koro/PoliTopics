@@ -1,4 +1,5 @@
 # 13. Monitoring and Logging
+[Japanese Version](./jp/13_monitoring_logging.md)
 
 ## Logs
 - Lambda logs: CloudWatch log groups for each Lambda function.

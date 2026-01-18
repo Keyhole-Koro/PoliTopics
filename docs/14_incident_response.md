@@ -1,4 +1,5 @@
 # 14. Incident Response
+[Japanese Version](./jp/14_incident_response.md)
 
 ## First response
 - Check CloudWatch logs for the failing Lambda.

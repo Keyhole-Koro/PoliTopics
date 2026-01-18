@@ -1,4 +1,5 @@
 # Functional Features Guide
+[Japanese Version](./jp/features.md)
 
 This document outlines the key features and functional flows of the PoliTopics system, organized by capability.
 

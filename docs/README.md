@@ -1,4 +1,5 @@
 # PoliTopics Docs Index
+[Japanese Version](./jp/README.md)
 
 This folder contains a split set of docs based on the current repository state.
 Existing docs are kept and referenced where useful.
@@ -35,6 +36,12 @@ Process
 
 Troubleshooting
 - `docs/18_troubleshooting.md`
+
+Submodule docs
+- `PoliTopicsWeb/docs/scripts_and_usage.md`
+- `PoliTopicsRecap/docs/scripts_and_usage.md`
+- `PoliTopicsDataCollection/doc/scripts_and_usage.md`
+- `PoliTopicsNotification/docs/scripts_and_usage.md`
 
 Existing docs
 - `docs/build.md`

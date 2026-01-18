@@ -1,14 +1,14 @@
-# 12. Deployment
-[Japanese Version](./jp/12_deploy.md)
+# 12. デプロイ
+[English Version](../../docs/12_deploy.md)
 
 ## DataCollection
-1) Build Lambda package:
+1) Lambda パッケージをビルド:
 ```
 cd PoliTopicsDataCollection
 pnpm install
 pnpm build
 ```
-2) Apply Terraform:
+2) Terraform を適用:
 ```
 cd terraform
 export ENV=stage
@@ -20,13 +20,13 @@ terraform apply tfplan
 ```
 
 ## Recap
-1) Build Lambda package:
+1) Lambda パッケージをビルド:
 ```
 cd PoliTopicsRecap
 pnpm install
 pnpm build
 ```
-2) Apply Terraform:
+2) Terraform を適用:
 ```
 cd terraform
 export ENV=stage
@@ -38,21 +38,21 @@ terraform apply tfplan
 
 ## Web
 Backend:
-- Build the backend Lambda bundle:
+- バックエンド Lambda バンドルをビルド:
 ```
 cd PoliTopicsWeb
 npm run build:backend
 ```
-- Apply Terraform from `PoliTopicsWeb/terraform` using stage/prod tfvars.
+- `PoliTopicsWeb/terraform` から stage/prod tfvars を使用して Terraform を適用。
 
 Frontend:
-- Build static assets:
+- 静的アセットをビルド:
 ```
 cd PoliTopicsWeb/frontend
 npm run build
 ```
-- Upload `frontend/out` to the frontend S3 bucket for the environment.
+- `frontend/out` を環境のフロントエンド S3 バケットにアップロード。
 
-## Rollback
-- Terraform: re-apply previous versions or restore from state/previous artifact.
-- S3 frontend: re-upload prior build output.
+## ロールバック
+- Terraform: 以前のバージョンを再適用するか、状態/以前のアーティファクトから復元する。
+- S3 フロントエンド: 以前のビルド出力を再アップロードする。

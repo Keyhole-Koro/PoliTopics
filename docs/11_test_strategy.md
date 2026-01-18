@@ -1,4 +1,5 @@
 # 11. Test Strategy
+[Japanese Version](./jp/11_test_strategy.md)
 
 ## Test types (current state)
 - Unit tests: Jest in DataCollection and Recap.

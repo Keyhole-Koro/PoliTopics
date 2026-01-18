@@ -1,4 +1,5 @@
 # 8. DB Design
+[Japanese Version](./jp/08_db_design.md)
 
 ## DynamoDB: LLM task table
 Used by DataCollection (write) and Recap (read/update).

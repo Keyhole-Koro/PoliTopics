@@ -1,4 +1,5 @@
 # 10. Coding Standards
+[Japanese Version](./jp/10_coding_standards.md)
 
 ## Language and structure
 - TypeScript across all services.

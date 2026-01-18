@@ -1,4 +1,5 @@
 # PoliTopics System Overview
+[Japanese Version](./jp/system_overview.md)
 
 ## Component Roles
 

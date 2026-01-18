@@ -1,4 +1,5 @@
 # PoliTopics Monorepo
+[Japanese Version](./jp/README.md)
 
 PoliTopics is a three-part pipeline that turns Japanese National Diet records into searchable summaries and a public web experience.
 

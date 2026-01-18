@@ -1,4 +1,5 @@
 # 17. Change Management
+[Japanese Version](./jp/17_change_management.md)
 
 ## Spec changes
 - No documented change control process (TBD).

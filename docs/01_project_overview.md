@@ -1,4 +1,5 @@
 # 1. Project Overview
+[Japanese Version](./jp/01_project_overview.md)
 
 ## Service purpose
 PoliTopics is a three-part pipeline that turns Japanese National Diet records into searchable summaries and a public web experience. It ingests meeting records, builds LLM prompt tasks, generates summaries, and serves them through a web UI and API.

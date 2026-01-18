@@ -1,4 +1,5 @@
 # Code Reading Guide (Goal-Oriented)
+[Japanese Version](./jp/00_code_reading_guide.md)
 
 This document summarizes where to start reading, based on your goal.
 

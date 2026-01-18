@@ -1,4 +1,5 @@
 # 18. Troubleshooting
+[Japanese Version](./jp/18_troubleshooting.md)
 
 ## Common errors
 

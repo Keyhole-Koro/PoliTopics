@@ -1,4 +1,5 @@
 # Build & Local Environment Guide
+[Japanese Version](./jp/build.md)
 
 Always work inside the Dev Container (host-only runs are unsupported).
 

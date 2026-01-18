@@ -1,4 +1,5 @@
 # 7. API Specification
+[Japanese Version](./jp/07_api_spec.md)
 
 ## DataCollection API
 ### POST /run (API Gateway -> Lambda)

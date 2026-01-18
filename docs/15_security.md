@@ -1,4 +1,5 @@
 # 15. Security Design
+[Japanese Version](./jp/15_security.md)
 
 ## Authentication
 - DataCollection `/run` requires `x-api-key` to match `RUN_API_KEY`.

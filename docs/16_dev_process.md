@@ -1,4 +1,5 @@
 # 16. Development Process
+[Japanese Version](./jp/16_dev_process.md)
 
 ## Git workflow
 - No formal workflow documented in the repo (TBD).

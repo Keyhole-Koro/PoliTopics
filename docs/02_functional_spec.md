@@ -1,4 +1,5 @@
 # 2. Functional Specification
+[Japanese Version](./jp/02_functional_spec.md)
 
 ## Feature list
 ### PoliTopicsDataCollection

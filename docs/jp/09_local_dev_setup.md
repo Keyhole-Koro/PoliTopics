@@ -1,7 +1,7 @@
-# 9. Local Development Setup
-[Japanese Version](./jp/09_local_dev_setup.md)
+# 9. ローカル開発セットアップ
+[English Version](../../docs/09_local_dev_setup.md)
 
-## Required tools
+## 必要なツール
 - Node.js 22+
 - pnpm (Recap, DataCollection)
 - npm (Web workspaces)
@@ -9,15 +9,15 @@
 - Terraform
 
 ## Dev container
-See `docs/build.md` for full instructions. The repo uses a shared dev container that runs LocalStack and DynamoDB Admin UI.
+完全な手順については `docs/jp/build.md` を参照してください。リポジトリは LocalStack と DynamoDB Admin UI を実行する共有 dev container を使用します。
 
-## LocalStack services
-- LocalStack endpoint: `http://localhost:4566`
+## LocalStack サービス
+- LocalStack エンドポイント: `http://localhost:4566`
 - DynamoDB Admin UI: `http://localhost:8001`
-- S3 (via LocalStack): Used for prompts, articles, and local assets.
+- S3 (via LocalStack): プロンプト、記事、ローカルアセットに使用されます。
 
-## Environment variables
-Common local defaults (see `docs/build.md`):
+## 環境変数
+一般的なローカルデフォルト (`docs/jp/build.md` を参照):
 - `AWS_REGION` / `AWS_DEFAULT_REGION`
 - `AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY`
 - `AWS_ENDPOINT_URL` / `LOCALSTACK_URL`
@@ -42,10 +42,10 @@ Web frontend
 - `NEXT_PUBLIC_LOG_LEVEL` (debug|info)
 
 Web backend
-- Uses `backend/src/config.ts` defaults (currently hard-coded to `local`).
+- `backend/src/config.ts` のデフォルトを使用 (現在は `local` にハードコードされています)。
 - `DISCORD_WEBHOOK_ERROR` / `DISCORD_WEBHOOK_WARN` / `DISCORD_WEBHOOK_ACCESS`
 
-## Quick commands
+## クイックコマンド
 DataCollection:
 ```
 cd PoliTopicsDataCollection
@@ -69,6 +69,6 @@ cd PoliTopicsWeb
 npm install --workspaces --include-workspace-root
 npm run dev:backend
 npm run dev:frontend
-# Run E2E tests against LocalStack
+# E2E テストを LocalStack に対して実行
 npm run test:e2e:localstack
 ```

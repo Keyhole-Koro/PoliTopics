@@ -1,4 +1,5 @@
 # 6. Architecture Design
+[Japanese Version](./jp/06_architecture.md)
 
 ## Technology choices (from repo)
 - TypeScript across DataCollection, Recap, and Web services.

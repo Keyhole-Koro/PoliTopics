@@ -1,4 +1,5 @@
 # 4. UI/UX Guide
+[Japanese Version](./jp/04_uiux_guide.md)
 
 ## Design rules
 - Clean, high-contrast layout for readability of long-form content.

@@ -62,3 +62,29 @@ Logged /article latency to stdout using hrtime-based timing around the handler. 
 
 Added Dynamo GetCommand timing for /article lookups, logging table, id, duration, and hit status. File changed:
 - `PoliTopicsWeb/backend/src/repositories/dynamoArticleRepository.ts`
+
+## 2026-01-18 10:00:00 JST - Gemini
+Keywords: documentation, translation, japanese
+Topic: Translate all documentation to Japanese
+Details:
+- Translated all Markdown documentation files in the root `docs/` folder and `README.md` to Japanese, creating `jp/` subdirectories.
+- Translated submodule documentation (`PoliTopicsDataCollection`, `PoliTopicsRecap`, `PoliTopicsWeb`, `PoliTopicsNotification`) to Japanese.
+- Added links between English and Japanese versions in all files.
+- Included `agent.md` and `changes.agent.md` (no translation for changes log, just this entry).
+Files:
+- README.md
+- jp/README.md
+- agent.md
+- jp/agent.md
+- docs/jp/*.md (all docs)
+- PoliTopicsDataCollection/jp/readme.md
+- PoliTopicsDataCollection/doc/jp/*.md
+- PoliTopicsNotification/jp/readme.md
+- PoliTopicsNotification/docs/jp/*.md
+- PoliTopicsRecap/docs/jp/*.md
+- PoliTopicsRecap/terraform/jp/README.md
+- PoliTopicsWeb/jp/README.md
+- PoliTopicsWeb/docs/jp/*.md
+- PoliTopicsWeb/cacheCron/jp/README.md
+- PoliTopicsWeb/profile/jp/README.md
+- PoliTopicsWeb/terraform/jp/README.md

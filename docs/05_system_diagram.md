@@ -1,4 +1,5 @@
 # 5. System Diagram
+[Japanese Version](./jp/05_system_diagram.md)
 
 ## Component map
 - PoliTopicsDataCollection (Lambda + API Gateway + EventBridge)

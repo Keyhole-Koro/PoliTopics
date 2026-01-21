@@ -1,6 +1,6 @@
 # PoliTopics
 
-[日本語版](./jp/README.md) ・ Live: https://politoipcs.net
+[日本語版](./jp/README.md) ・ Live: https://politopics.net
 
 PoliTopics provides AI-generated, easy-to-read summaries of Japan’s National Diet records with no human tampering.
 

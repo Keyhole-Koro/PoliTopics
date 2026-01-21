@@ -1,7 +1,7 @@
 # PoliTopics Monorepo
-[English Version](../README.md)
+[English Version](../README.md) ・ 本番: https://politoipcs.net
 
-PoliTopics は、日本の国会会議録を検索可能な要約と公開 Web 体験に変換する 3 部構成のパイプラインです。
+PoliTopics は、AI によって分かりやすく、恣意的な操作のない国会情報を提供するプロジェクトです。
 - 会議録を収集し、プロンプトサイズに分割して LLM タスクを登録
 - 読みやすい要約とアセットを生成し、メタデータを DynamoDB に保存
 - DynamoDB/R2 をバックエンドにした SPA + API を提供し、ヘッドラインをキャッシュ
@@ -10,8 +10,8 @@ PoliTopics は、日本の国会会議録を検索可能な要約と公開 Web �
 
 | ディレクトリ                   | コンポーネント                       | 概要                                                                               |
 | --------------------------- | ------------------------------- | ------------------------------------------------------------------------------------- |
-| `PoliTopicsDataCollection/` | 収集 + プロンプトファンアウト      | 会議録のダウンロード、プロンプトのチャンク化、ペイロードのS3への保存、DynamoDBへのタスク登録 |
-| `PoliTopicsRecap/`          | LLM要約 + 記事永続化 | タスクの処理、要約の生成、DynamoDB + S3への記事保存                |
+| `PoliTopicsDataCollection/` | 収集 + タスク生成      | 会議録のダウンロード、プロンプトのチャンク化、プロンプトのS3保存、DynamoDBへのタスク登録 |
+| `PoliTopicsRecap/`          | LLM要約 + 記事永続化 | タスクの処理、要約の生成、DynamoDB + R2 への記事保存                |
 | `PoliTopicsWeb/`            | Webアプリ + API                   | DynamoDB と R2 をバックエンドとする Next.js SPA + Cloudflare Workers (Hono) API           |
 
 ## アーキテクチャと図
@@ -42,9 +42,9 @@ PoliTopics は、日本の国会会議録を検索可能な要約と公開 Web �
 │   ├── src/
 │   ├── terraform/
 │   └── docs/
-├── PoliTopicsWeb/              # Webアプリ + API (Next.js + Fastify + Terraform)
+├── PoliTopicsWeb/              # Webアプリ + API (Next.js + Workers/Hono + Terraform)
 │   ├── frontend/
-│   ├── backend/
+│   ├── backend/               # (旧 Lambda)、現行は workers/backend の Hono を使用
 │   └── terraform/
 ├── docs/                       # プロジェクトドキュメント (トピック別)
 │   ├── 00_code_reading_guide.md
@@ -75,8 +75,8 @@ PoliTopics は、日本の国会会議録を検索可能な要約と公開 Web �
 ```
 
 ## フロントエンドのホスティングとデプロイ
-- Local/localstack: `frontend_deploy_enabled = true` の場合、Terraform が SPA をビルドして LocalStack S3 バケットにアップロードします (`terraform/tfvars/localstack.tfvars` を参照)。
-- Stage/Prod: Terraform は SPA をアップロードしません。GitHub Actions ワークフロー `.github/workflows/deploy-frontend.yml` を介してデプロイします。これは `terraform output backend_api_url` から `NEXT_PUBLIC_API_BASE_URL` を使用してフロントエンドをビルドし、Cloudflare R2 に同期します (実行前にリポジトリに R2 シークレットを設定してください)。
+- Local/localstack: `frontend_deploy_enabled = true` の場合、Terraform が SPA をビルドして LocalStack バケットにアップロードします (`terraform/tfvars/localstack.tfvars` を参照)。
+- Stage/Prod: GitHub Actions ワークフロー `.github/workflows/deploy-frontend.yml` でデプロイします。`terraform output backend_api_url` の `NEXT_PUBLIC_API_BASE_URL` でビルドし、Cloudflare R2 に同期します (事前に R2 シークレットを設定)。
 
 ## エージェントガイド
 AIエージェントのルール、LocalStackの要件、変更ログの期待事項については `agent.md` を参照してください。

@@ -12,10 +12,10 @@ flowchart LR
         S4["④ Summarize via LLM"]
         S5["⑤ Persist Results"]
         S6["⑥ Update Task Status as Completed"]
-        AssetBucket[("S3 / Cloudflare R2<br>AssetBucket")]
+        AssetBucket[("Cloudflare R2 (S3 API)<br>AssetBucket")]
         TaskTable[("DynamoDB<br>TaskTable: llm_task_table")]
         ArticleTable[("DynamoDB<br>ArticleTable: politopics_article_table")]
-        PromptBucket[("S3 Bucket<br>PromptBucket")]
+        PromptBucket[("Amazon S3<br>PromptBucket")]
   end
     RecapSchedule --> S1
     S1 --> RecapBatch

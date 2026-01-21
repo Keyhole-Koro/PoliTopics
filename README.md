@@ -1,5 +1,5 @@
 # PoliTopics Monorepo
-[Japanese Version](./jp/README.md)
+[日本語版](./jp/README.md)
 
 PoliTopics turns Japanese National Diet records into searchable summaries and a public web experience.
 - Collects minutes, slices them into prompt-sized chunks, and registers LLM tasks
@@ -12,7 +12,7 @@ PoliTopics turns Japanese National Diet records into searchable summaries and a 
 | --------------------------- | ------------------------------- | ------------------------------------------------------------------------------------- |
 | `PoliTopicsDataCollection/` | Ingestion + prompt fan-out      | Downloads records, chunks prompts, stores payloads in S3, registers tasks in DynamoDB |
 | `PoliTopicsRecap/`          | LLM recap + article persistence | Processes tasks, generates summaries, stores articles in DynamoDB + S3                |
-| `PoliTopicsWeb/`            | Web app + API                   | Next.js SPA + Fastify API backed by DynamoDB and S3                                   |
+| `PoliTopicsWeb/`            | Web app + API                   | Next.js SPA + Cloudflare Workers (Hono) API backed by DynamoDB and R2                 |
 
 ## Architecture & Diagrams
 - Mermaid sources (EN): `docs/diagrams/datacollection.mmd`, `docs/diagrams/recap.mmd`, `docs/diagrams/web.mmd`
@@ -22,7 +22,8 @@ PoliTopics turns Japanese National Diet records into searchable summaries and a 
 
 ## Documentation
 - Index: `docs/README.md` (JP: `docs/jp/README.md`)
-- Quick starts: `docs/09_local_dev_setup.md`, `docs/build.md`
+- Quick starts: `docs/09_local_dev_setup.md`
+- Architecture & choices: `docs/06_architecture.md`, `docs/tech_choices.md`
 - APIs/data: `docs/07_api_spec.md`, `docs/08_db_design.md`
 - Operations: `docs/12_deploy.md`, `docs/13_monitoring_logging.md`
 
@@ -65,7 +66,6 @@ PoliTopics turns Japanese National Diet records into searchable summaries and a 
 │   ├── 16_dev_process.md
 │   ├── 17_change_management.md
 │   ├── 18_troubleshooting.md
-│   ├── build.md
 │   ├── system_overview.md
 │   └── README.md
 ├── scripts/                    # Repo-level helpers

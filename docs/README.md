@@ -1,5 +1,5 @@
 # PoliTopics Docs Index
-[Japanese Version](./jp/README.md)
+[日本語版](./jp/README.md)
 
 This folder contains a split set of docs based on the current repository state.
 Existing docs are kept and referenced where useful.
@@ -14,6 +14,7 @@ Core overview
 System design
 - `docs/05_system_diagram.md`
 - `docs/06_architecture.md`
+- `docs/tech_choices.md`
 
 API and data
 - `docs/07_api_spec.md`
@@ -44,5 +45,4 @@ Submodule docs
 - `PoliTopicsNotification/docs/scripts_and_usage.md`
 
 Existing docs
-- `docs/build.md`
 - `docs/system_overview.md`

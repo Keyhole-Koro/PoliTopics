@@ -1,15 +1,19 @@
 # 7. API 仕様
+
 [English Version](../../docs/07_api_spec.md)
 
 ## DataCollection API
+
 ### POST /run (API Gateway -> Lambda)
-- 認証: `x-api-key` ヘッダーは `RUN_API_KEY` と一致する必要があります。
+
+- 認証: `x-api-key` ヘッダーを `RUN_API_KEY` と一致させる。
 - ボディ (JSON, オプション):
   - `from`: `YYYY-MM-DD`
   - `until`: `YYYY-MM-DD`
-- ボディが空の場合、`from` と `until` の両方が今日 (JST) にデフォルト設定されます。
+- ボディが空の場合、`from` と `until` の両方を今日 (JST) にデフォルト設定。
 
 例:
+
 ```
 POST /run
 x-api-key: <RUN_API_KEY>
@@ -19,74 +23,71 @@ Content-Type: application/json
 ```
 
 レスポンス:
+
 - `200 {"message":"Event processed."}`
 - `200 {"message":"No meetings found for the specified range."}`
 - `401 {"error":"unauthorized"}`
 - `400 {"error":"invalid_json"}`
 - `400 {"error":"invalid_range","message":"from must be <= until"}`
-- `500 {"error":"server_misconfigured"}` `RUN_API_KEY` が設定されていない場合
-- `500 {"error":"prompt_over_budget"}` プロンプトがトークン予算を超えた場合
-- `500 {"error":"internal_error"}` 予期しないエラーの場合
+- `500 {"error":"server_misconfigured"}` (`RUN_API_KEY` 未設定)
+- `500 {"error":"prompt_over_budget"}` (プロンプトがトークン予算超過)
+- `500 {"error":"internal_error"}` (予期しないエラー)
 
 ## Web backend API
-ベースパスは API Gateway のステージルートです。Lambda はステージデプロイのためにパスから `/stage` を取り除きます。
-インタラクティブな Swagger ドキュメントは `/docs` で利用可能です (local/dev 環境)。
+
+Cloudflare Workers (V8 + Hono) で提供。インタラクティブな Swagger は `/docs` (local/dev) にある。
 
 ### GET /healthz
+
 - レスポンス: `{ "status": "ok" }`
 
 ### GET /headlines
+
 クエリパラメータ:
+
 - `limit` (1-50, デフォルト 6)
 - `start` (オフセット, デフォルト 0)
 - `end` (オプション, limit を上書き)
 
 レスポンス:
+
 ```
 { "items": [...], "limit": 6, "start": 0, "end": 6, "hasMore": true }
 ```
 
-### GET /search
-クエリパラメータ:
-- `words` (カンマ区切り)
-- `categories` (カンマ区切り)
-- `houses` (カンマ区切り)
-- `meetings` (カンマ区切り)
-- `dateStart` (ISO 日付文字列)
-- `dateEnd` (ISO 日付文字列)
-- `sort` (`date_desc` | `date_asc`, デフォルト `date_desc`)
-- `limit` (デフォルト 20)
+### GET /suggest
 
-レスポンス:
-```
-{ "query": { ...filters }, "items": [...], "total": <count> }
-```
-
-### GET /search/suggest
 クエリパラメータ:
+
 - `input` (文字列)
 - `limit` (デフォルト 5)
-- `categories`, `houses`, `meetings`, `dateStart`, `dateEnd` (検索と同じ)
+- `categories`, `houses`, `meetings`, `dateStart`, `dateEnd` (任意のフィルタ)
 
 レスポンス:
+
 ```
 { "input": "<input>", "suggestions": ["..."] }
 ```
 
 ### GET /article/:id
+
 レスポンス:
-- `200 { "article": { ..., "assetUrl": "https://..." } }`
+
+- `200 { "article": { ..., "assetUrl": "https://..." } }` (`assetUrl` は R2 の公開URL)
 - `404 { "message": "Article not found" }`
 
 ## 認証
-- DataCollection `/run` は `x-api-key` が必要です。
-- Web API は現在認証がありません。
+
+- DataCollection `/run` は `x-api-key` が必要。
+- Web API は認証なしだが、Cloudflare がエッジで攻撃トラフィックを吸収する。
 
 ## エラーコード
+
 - DataCollection エラーは上記で定義されています。
 - Web API エラー:
   - `404 Not Found` (不明なパス)
   - `500 Internal error`
 
 ## レート制限
-- コード内でレート制限は実装されていません (TBD)。
+
+- コード内でレート制限は未実装 (TBD)。

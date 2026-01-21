@@ -1,5 +1,5 @@
 # 10. Coding Standards
-[Japanese Version](./jp/10_coding_standards.md)
+[日本語版](./jp/10_coding_standards.md)
 
 ## Language and structure
 - TypeScript across all services.
@@ -12,12 +12,16 @@
 - Environment variables are uppercase with underscores.
 
 ## Lint and formatting
-- Frontend has ESLint (`npm --prefix frontend run lint`).
-- Backend and pipeline services do not define a lint rule set in repo.
+- Frontend has ESLint (`npm --prefix frontend run lint`), but linting is not enforced in CI.
+- Backend and pipeline services include lint configs only nominally; lint is not part of the standard workflow.
 - Follow existing code style when editing in those modules.
+
+## Configuration handling
+- Environment variables are centralized and validated in each module's `config.ts`.
+- Avoid reading `process.env` directly in source code outside the config modules.
 
 ## Directory conventions
 - `PoliTopicsDataCollection/src`: ingestion Lambda, National Diet API client, DynamoDB tasks.
 - `PoliTopicsRecap/src`: task processor, LLM clients, DynamoDB article persistence.
 - `PoliTopicsWeb/frontend`: SPA.
-- `PoliTopicsWeb/backend`: Fastify API.
+- `PoliTopicsWeb/workers/backend`: Hono API on Cloudflare Workers.

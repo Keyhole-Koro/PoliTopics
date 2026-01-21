@@ -1,5 +1,5 @@
 # 9. Local Development Setup
-[Japanese Version](./jp/09_local_dev_setup.md)
+[日本語版](./jp/09_local_dev_setup.md)
 
 ## Required tools
 - Node.js 22+
@@ -8,47 +8,22 @@
 - Docker + Docker Compose (LocalStack)
 - Terraform
 
-## Dev container
-See `docs/build.md` for full instructions. The repo uses a shared dev container that runs LocalStack and DynamoDB Admin UI.
-
-## LocalStack services
+## Local services
 - LocalStack endpoint: `http://localhost:4566`
 - DynamoDB Admin UI: `http://localhost:8001`
-- S3 (via LocalStack): Used for prompts, articles, and local assets.
+- Storage: prompts/results use LocalStack S3; article assets and SPA can be synced to R2 (S3 API) in local flows; Workers dev uses Wrangler locally.
 
-## Environment variables
-Common local defaults (see `docs/build.md`):
-- `AWS_REGION` / `AWS_DEFAULT_REGION`
-- `AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY`
-- `AWS_ENDPOINT_URL` / `LOCALSTACK_URL`
+## Environment variables (current)
+- Shared AWS/LocalStack: `AWS_REGION` / `AWS_DEFAULT_REGION`, `AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL` (LocalStack), `LOCALSTACK_URL` (where used), `APP_ENVIRONMENT` or `ACTIVE_ENVIRONMENT` (`local`/`stage`/`prod`/`ghaTest`/`localstackTest`).
+- DataCollection: `GEMINI_API_KEY`, `RUN_API_KEY`, `LLM_TASK_TABLE`, `PROMPT_BUCKET`, `DISCORD_WEBHOOK_ERROR`, `DISCORD_WEBHOOK_WARN`, `DISCORD_WEBHOOK_BATCH`, `NATIONAL_DIET_API_ENDPOINT` (optional override), `ERROR_BUCKET` (optional), cache toggles.
+- Recap: `GEMINI_API_KEY`, `DISCORD_WEBHOOK_ERROR`, `DISCORD_WEBHOOK_WARN`, `DISCORD_WEBHOOK_BATCH`, `R2_ENDPOINT_URL`, `R2_REGION` (default `auto`), `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_ARTICLE_BUCKET`, `R2_PUBLIC_URL_BASE`, `ENABLE_NOTIFICATION`, `NOTIFICATION_DELAY_MS`.
+- Web backend (Workers/Hono): `ACTIVE_ENVIRONMENT` (`local`/`stage`/`prod`/`localstack`/`localstackTest`), `DATA_MODE` (`dynamo`|`mock`), `ASSET_URL_TTL_SECONDS`, `DISABLE_NOTIFICATIONS`, `DISCORD_WEBHOOK_ERROR`, `DISCORD_WEBHOOK_WARN`, `DISCORD_WEBHOOK_ACCESS`.
+- Web frontend: `NEXT_PUBLIC_APP_ENV`, `NEXT_PUBLIC_API_BASE_URL`, `NEXT_PUBLIC_LOG_LEVEL`.
 
-DataCollection
-- `APP_ENVIRONMENT` (local|stage|prod)
-- `GEMINI_API_KEY`
-- `RUN_API_KEY`
-- `LLM_TASK_TABLE`
-- `PROMPT_BUCKET`
-- `ERROR_BUCKET` (optional)
-- `DISCORD_WEBHOOK_ERROR` / `DISCORD_WEBHOOK_WARN` / `DISCORD_WEBHOOK_BATCH`
-
-Recap
-- `APP_ENVIRONMENT` (local|stage|prod)
-- `GEMINI_API_KEY`
-- `DISCORD_WEBHOOK_ERROR` / `DISCORD_WEBHOOK_WARN` / `DISCORD_WEBHOOK_BATCH`
-- `R2_ENDPOINT_URL` (S3 API endpoint for R2)
-- `R2_REGION` (Default: auto)
-- `R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY` (R2 Credentials)
-- `R2_ARTICLE_BUCKET` (Bucket name)
-- `R2_PUBLIC_URL_BASE` (Public domain for assets, e.g., https://asset.politopics.net)
-
-Web frontend
-- `NEXT_PUBLIC_APP_ENV` (local|stage|prod)
-- `NEXT_PUBLIC_API_BASE_URL` (optional override)
-- `NEXT_PUBLIC_LOG_LEVEL` (debug|info)
-
-Web backend
-- Uses `backend/src/config.ts` defaults (currently hard-coded to `local`).
-- `DISCORD_WEBHOOK_ERROR` / `DISCORD_WEBHOOK_WARN` / `DISCORD_WEBHOOK_ACCESS`
+## Tests
+- `npm test` / `pnpm test` use `pretest` scripts to auto-apply LocalStack resources; no manual Terraform step is needed for local runs.
+- `npm run test` in `PoliTopicsWeb` executes Playwright e2e after provisioning LocalStack via `scripts/ensure-localstack.sh`.
+- Push triggers run per repository; CI uses `APP_ENVIRONMENT=ghaTest` because GitHub runners cannot reuse the local Docker network or route to `localstack:4566`. Local profiles are not used in CI.
 
 ## Quick commands
 DataCollection:
@@ -74,6 +49,5 @@ cd PoliTopicsWeb
 npm install --workspaces --include-workspace-root
 npm run dev:backend
 npm run dev:frontend
-# Run E2E tests against LocalStack
-npm run test:e2e:localstack
+npm test
 ```

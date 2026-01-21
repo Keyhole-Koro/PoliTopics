@@ -1,58 +1,19 @@
 # 12. Deployment
-[Japanese Version](./jp/12_deploy.md)
+[日本語版](./jp/12_deploy.md)
 
-## DataCollection
-1) Build Lambda package:
-```
-cd PoliTopicsDataCollection
-pnpm install
-pnpm build
-```
-2) Apply Terraform:
-```
-cd terraform
-export ENV=stage
-export TF_VAR_gemini_api_key="<key>"
-export TF_VAR_run_api_key="<key>"
-terraform init -backend-config=backends/stage.hcl
-terraform plan -var-file=tfvars/stage.tfvars -out=tfplan
-terraform apply tfplan
-```
+## Automated deploys
+- Stage/Prod branches trigger GitHub Actions to deploy DataCollection, Recap (Fargate), and Web (Workers + R2/frontend).
+- CI supplies `APP_ENVIRONMENT=ghaTest` for tests before deploy.
 
-## Recap
-1) Build Lambda package:
-```
-cd PoliTopicsRecap
-pnpm install
-pnpm build
-```
-2) Apply Terraform:
-```
-cd terraform
-export ENV=stage
-export TF_VAR_gemini_api_key="<key>"
-terraform init -backend-config=backends/stage.hcl
-terraform plan -var-file=tfvars/stage.tfvars -out=tfplan
-terraform apply tfplan
-```
+## Manual deploy (when needed)
+- Set your own AWS credentials in the shell (see troubleshooting for exact env vars) and export `TF_VAR_gemini_api_key` before running Terraform.
+- DataCollection/Recap: run `pnpm build` then Terraform in each module with the stage/prod tfvars.
+- Web backend/frontend has many environment variables; manual deploy is discouraged. Prefer the GitHub Actions workflows.
 
-## Web
-Backend:
-- Build the backend Lambda bundle:
-```
-cd PoliTopicsWeb
-npm run build:backend
-```
-- Apply Terraform from `PoliTopicsWeb/terraform` using stage/prod tfvars.
-
-Frontend:
-- Build static assets:
-```
-cd PoliTopicsWeb/frontend
-npm run build
-```
-- Upload `frontend/out` to the frontend S3 bucket for the environment.
+## Terraform state and locking
+- Terraform state lives in an S3 bucket (per module backend config). Keep the bucket available before running `init`/`plan`/`apply`.
+- There is no apply lock for concurrency; avoid running multiple applies at the same time.
 
 ## Rollback
-- Terraform: re-apply previous versions or restore from state/previous artifact.
-- S3 frontend: re-upload prior build output.
+- Terraform: re-apply a previous plan or restore from the stored state.
+- Frontend assets: re-upload the prior build to R2 if needed.

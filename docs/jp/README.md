@@ -14,6 +14,7 @@
 システム設計
 - `docs/jp/05_system_diagram.md`
 - `docs/jp/06_architecture.md`
+- `docs/jp/tech_choices.md`
 
 APIとデータ
 - `docs/jp/07_api_spec.md`
@@ -44,5 +45,4 @@ APIとデータ
 - `PoliTopicsNotification/docs/scripts_and_usage.md` (未翻訳)
 
 既存のドキュメント
-- `docs/jp/build.md`
 - `docs/jp/system_overview.md`

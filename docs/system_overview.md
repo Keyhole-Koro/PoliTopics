@@ -1,38 +1,38 @@
 # PoliTopics System Overview
-[Japanese Version](./jp/system_overview.md)
+[日本語版](./jp/system_overview.md)
 
 ## Component Roles
 
 ### PoliTopicsDataCollection
-- Role: Fetch National Diet records, split into LLM-ready prompts, store assets in S3, and register tasks in DynamoDB.
+- Role: Fetch National Diet records, split into LLM-ready prompts, store prompts in S3, and register tasks in DynamoDB.
 - Main flow:
   - Fetch meeting records from the National Diet API.
   - Split long text into LLM-sized chunks.
-  - Store prompt JSON in S3 and record S3 URLs in tasks.
+  - Store prompt JSON in S3 and record URLs in tasks.
   - Create issue-level tasks in the DynamoDB LLM task table.
 
 ### PoliTopicsRecap
 - Role: Pull tasks from DynamoDB, run LLM summarization, and persist articles.
 - Main flow:
   - Read pending tasks from the DynamoDB task table.
-  - Load prompts from S3 and run map/reduce summarization.
-  - Store heavy article assets in S3.
+  - Load prompts from R2 and run map/reduce summarization.
+  - Store heavy article assets in R2.
   - Write article metadata + indexes into the DynamoDB article table.
   - Update task status to completed.
 
 ### PoliTopicsWeb
 - Role: Serve a web app to search and read generated articles.
 - Main flow:
-  - frontend: Next.js SPA for search and article detail UI.
-  - backend: Fastify + Lambda API that queries DynamoDB and fetches assets from S3.
+  - frontend: Next.js SPA for search and article detail UI (SPA assets on R2).
+  - backend: Cloudflare Workers (V8) + Hono API that queries DynamoDB and fetches assets from R2.
   - infra/terraform: Infrastructure for local development (LocalStack) and production.
 
 ## Data Flow
 1. DataCollection fetches records and stores prompts in S3.
 2. DataCollection creates tasks in the DynamoDB LLM task table.
 3. Recap processes tasks and generates summaries with LLMs.
-4. Recap writes articles to DynamoDB and stores assets in S3.
-5. Web backend serves articles from DynamoDB + S3 to the frontend.
+4. Recap writes articles to DynamoDB and stores assets in R2.
+5. Web backend serves articles from DynamoDB + R2 to the frontend and exposes public/signed asset URLs.
 
 ## DB Schema Overview
 
@@ -68,12 +68,12 @@
     - `PK`: `A#<id>`
     - `SK`: `META`
     - `type`: `ARTICLE`
-    - `asset_url`: S3 pointer to detailed asset JSON (returned as signed URL by API)
+    - `asset_url`: R2 pointer to detailed asset JSON (returned as signed/public URL by API)
     - `GSI1PK`: `ARTICLE`, `GSI1SK`: `<ISO-UTC date>`
     - `GSI2PK`: `Y#YYYY#M#MM`, `GSI2SK`: `<ISO-UTC date>`
     - Key fields: `title`, `date`, `month`, `imageKind`, `session`, `nameOfHouse`, `nameOfMeeting`,
       `categories`, `description`, `participants`, `keywords`, `terms`, etc.
-    - `summary`, `soft_language_summary`, `middle_summary`, `dialogs` are stored in S3 and referenced via `asset_url`.
+    - `summary`, `soft_language_summary`, `middle_summary`, `dialogs` are stored in R2 and referenced via `asset_url`.
   - Thin index items (list/search)
     - `PK`: `CATEGORY#<name>` / `PERSON#<name>` / `KEYWORD#<kw>` / `IMAGEKIND#<kind>` /
       `SESSION#<session>` / `HOUSE#<house>` / `MEETING#<meeting>`
@@ -85,6 +85,6 @@
     - `SK`: `D#<ISO-UTC>#KW#<keyword>#A#<id>`
     - `type`: `KEYWORD_OCCURRENCE`
 
-## Notes: S3
-- DataCollection: stores prompts and intermediate results (`prompt_url`, `result_url`).
-- Recap/Web: stores detailed article assets; DynamoDB keeps `asset_url` only.
+## Notes: Storage
+- Prompts and reduce outputs: Amazon S3 (DataCollection + Recap).
+- Article assets and SPA build output: Cloudflare R2 (served via public/signed URLs).

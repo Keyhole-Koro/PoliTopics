@@ -15,7 +15,6 @@ Measured by invoking the function after a period of inactivity.
 | ------------ | -------: | -------: | -------: | -------: |
 | `/headlines` |  6228.89 |  6285.55 |  6314.38 |  6314.38 |
 | `/article`   |  6432.02 |  6319.97 |  6702.59 |  6702.59 |
-| `/search`    |  4985.03 |  5809.22 |  6133.70 |  6133.70 |
 
 > Cloudflare Workers do not exhibit measurable cold start latency due to their isolate-based execution model.
 
@@ -41,15 +40,6 @@ Measured by invoking the function after a period of inactivity.
 
 ---
 
-### `/search`
-
-| Platform           |  Avg (ms) |   p95 (ms) |
-| ------------------ | --------: | ---------: |
-| AWS Lambda         |    296.75 |     630.88 |
-| Cloudflare Workers | **85.88** | **211.02** |
-
----
-
 ## Overall Comparison
 
 ### Cold Start vs Steady State (Avg)
@@ -58,7 +48,6 @@ Measured by invoking the function after a period of inactivity.
 | ------------ | ----------------: | ------------: | -------------: |
 | `/headlines` |            ~6.2 s |      454.6 ms |  **234.79 ms** |
 | `/article`   |            ~6.4 s |     763.87 ms |  **377.91 ms** |
-| `/search`    |            ~5.0 s |     296.75 ms |   **85.88 ms** |
 
 ---
 

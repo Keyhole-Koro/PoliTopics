@@ -3,7 +3,7 @@ flowchart LR
   subgraph DC[PoliTopicsDataCollection / Ingestion Service]
     IngestSchedule["EventBridge (Cron)<br/>IngestSchedule"]
     IngestLambda["AWS Lambda (Node.js)<br/>IngestLambda"]
-    PromptBucket[(S3 Bucket<br/>PromptBucket)]
+    PromptBucket[(Amazon S3<br/>PromptBucket)]
     TaskTable[(DynamoDB<br/>TaskTable: llm_task_table)]
   end
 

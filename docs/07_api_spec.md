@@ -1,5 +1,5 @@
 # 7. API Specification
-[Japanese Version](./jp/07_api_spec.md)
+[日本語版](./jp/07_api_spec.md)
 
 ## DataCollection API
 ### POST /run (API Gateway -> Lambda)
@@ -29,8 +29,7 @@ Responses:
 - `500 {"error":"internal_error"}` for unexpected errors
 
 ## Web backend API
-Base path is the API Gateway stage root. The Lambda strips `/stage` from the path for stage deployments.
-Interactive Swagger documentation is available at `/docs` (in local/dev environments).
+Served from Cloudflare Workers (V8 + Hono). Interactive Swagger documentation is available at `/docs` (in local/dev environments).
 
 ### GET /healthz
 - Response: `{ "status": "ok" }`
@@ -46,27 +45,11 @@ Response:
 { "items": [...], "limit": 6, "start": 0, "end": 6, "hasMore": true }
 ```
 
-### GET /search
-Query params:
-- `words` (comma-separated)
-- `categories` (comma-separated)
-- `houses` (comma-separated)
-- `meetings` (comma-separated)
-- `dateStart` (ISO date string)
-- `dateEnd` (ISO date string)
-- `sort` (`date_desc` | `date_asc`, default `date_desc`)
-- `limit` (default 20)
-
-Response:
-```
-{ "query": { ...filters }, "items": [...], "total": <count> }
-```
-
-### GET /search/suggest
+### GET /suggest
 Query params:
 - `input` (string)
 - `limit` (default 5)
-- `categories`, `houses`, `meetings`, `dateStart`, `dateEnd` (same as search)
+- `categories`, `houses`, `meetings`, `dateStart`, `dateEnd` (optional filters)
 
 Response:
 ```
@@ -75,12 +58,13 @@ Response:
 
 ### GET /article/:id
 Response:
-- `200 { "article": { ..., "assetUrl": "https://..." } }`
+- `200 { "article": { ..., "assetUrl": "https://..." } }` (assetUrl is a public/signed URL to R2)
 - `404 { "message": "Article not found" }`
 
 ## Auth
 - DataCollection `/run` requires `x-api-key`.
 - Web API has no auth at the moment.
+- Cloudflare sits in front of the Workers API to absorb basic abuse and edge-level attacks.
 
 ## Error codes
 - DataCollection errors are defined above.

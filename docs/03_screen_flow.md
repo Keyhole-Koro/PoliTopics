@@ -1,5 +1,5 @@
 # 3. Screen Flow
-[Japanese Version](./jp/03_screen_flow.md)
+[日本語版](./jp/03_screen_flow.md)
 
 ## Screen list
 - Home: `/`

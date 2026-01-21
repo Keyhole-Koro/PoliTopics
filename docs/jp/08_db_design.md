@@ -31,7 +31,7 @@ Recap (書き込み) と Web (読み取り) で使用。
 - `PK`: `A#<id>`
 - `SK`: `META`
 - `type`: `ARTICLE`
-- `asset_url`: 大きなアセット JSON のための S3 URL
+- `asset_url`: 大きなアセット JSON のための R2 URL
 - `GSI1PK`: `ARTICLE`
 - `GSI1SK`: `<ISO date>`
 - `GSI2PK`: `Y#YYYY#M#MM`
@@ -50,6 +50,6 @@ Recap (書き込み) と Web (読み取り) で使用。
 - `SK`: `D#<ISO>#KW#<keyword>#A#<id>`
 - `type`: `KEYWORD_OCCURRENCE`
 
-## S3 使用法
-- プロンプトバケット: DataCollection プロンプトペイロードと Recap 結果 JSON。
-- 記事アセットバケット: Recap は重いフィールド (`summary`, `soft_language_summary`, `middle_summary`, `dialogs`) を含む `asset.json` を保存します。
+## R2 使用法 (S3 API)
+- プロンプトバケット: DataCollection プロンプトと Recap 結果 JSON。
+- 記事アセットバケット: Recap は重いフィールド (`summary`, `soft_language_summary`, `middle_summary`, `dialogs`) を含む `asset.json` を保存。

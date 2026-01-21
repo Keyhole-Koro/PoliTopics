@@ -12,7 +12,7 @@ PoliTopics は、日本の国会会議録を検索可能な要約と公開 Web �
 | --------------------------- | ------------------------------- | ------------------------------------------------------------------------------------- |
 | `PoliTopicsDataCollection/` | 収集 + プロンプトファンアウト      | 会議録のダウンロード、プロンプトのチャンク化、ペイロードのS3への保存、DynamoDBへのタスク登録 |
 | `PoliTopicsRecap/`          | LLM要約 + 記事永続化 | タスクの処理、要約の生成、DynamoDB + S3への記事保存                |
-| `PoliTopicsWeb/`            | Webアプリ + API                   | DynamoDBとS3をバックエンドとするNext.js SPA + Fastify API                                   |
+| `PoliTopicsWeb/`            | Webアプリ + API                   | DynamoDB と R2 をバックエンドとする Next.js SPA + Cloudflare Workers (Hono) API           |
 
 ## アーキテクチャと図
 - Mermaid ソース (英): `docs/diagrams/datacollection.mmd`, `docs/diagrams/recap.mmd`, `docs/diagrams/web.mmd`
@@ -22,7 +22,8 @@ PoliTopics は、日本の国会会議録を検索可能な要約と公開 Web �
 
 ## ドキュメント
 - インデックス: `docs/jp/README.md`（英: `docs/README.md`）
-- クイックスタート: `docs/jp/09_local_dev_setup.md`, `docs/jp/build.md`
+- クイックスタート: `docs/jp/09_local_dev_setup.md`
+- アーキテクチャ/選定理由: `docs/jp/06_architecture.md`, `docs/jp/tech_choices.md`
 - API/データ: `docs/jp/07_api_spec.md`, `docs/jp/08_db_design.md`
 - 運用: `docs/jp/12_deploy.md`, `docs/jp/13_monitoring_logging.md`
 
@@ -65,7 +66,6 @@ PoliTopics は、日本の国会会議録を検索可能な要約と公開 Web �
 │   ├── 16_dev_process.md
 │   ├── 17_change_management.md
 │   ├── 18_troubleshooting.md
-│   ├── build.md
 │   ├── system_overview.md
 │   └── README.md
 ├── scripts/                    # リポジトリレベルのヘルパー

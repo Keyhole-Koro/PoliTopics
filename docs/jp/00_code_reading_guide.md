@@ -29,11 +29,10 @@
 - `PoliTopicsDataCollection/src/utils/packing.ts` (トークンベースのパッキング)
 - `PoliTopicsDataCollection/src/lambda/taskBuilder.ts` (分割 vs 単一)
 
-### プロンプト形状とS3ペイロード
+### プロンプト形状と R2 ペイロード
 - `PoliTopicsDataCollection/src/lambda/taskBuilder.ts` (プロンプトペイロードの書き込み)
 - `PoliTopicsRecap/src/lambda/taskProcessor.ts` (プロンプト/結果の読み書き)
-- `PoliTopicsRecap/src/utils/s3.ts` (S3 ヘルパー: 中間成果物用)
-- `PoliTopicsRecap/src/utils/r2.ts` (R2 ヘルパー: 最終成果物用)
+- `PoliTopicsRecap/src/utils/r2.ts` (中間成果物と最終記事アセットの R2 ヘルパー)
 
 ### LLM呼び出しとモデル設定
 - `PoliTopicsRecap/src/llm/geminiClient.ts` (Gemini API)
@@ -41,61 +40,28 @@
 - `PoliTopicsDataCollection/src/lambda_handler.ts` (Gemini トークンカウント)
 
 ### 記事の永続化フォーマット
-- `PoliTopicsRecap/src/dynamoDB/storeData.ts` (シングルテーブル + S3 アセット)
+- `PoliTopicsRecap/src/dynamoDB/storeData.ts` (シングルテーブル + R2 アセット)
 - `PoliTopicsRecap/src/dynamoDB/article.d.ts` (記事の型定義)
 - `PoliTopicsWeb/backend/src/repositories/dynamoArticleMapper.ts` (Dynamo -> API マッピング)
 
-### Web API エントリーポイントと検索動作
-- `PoliTopicsWeb/backend/src/http/routes/articles.ts`
-  - `/headlines`, `/search`, `/search/suggest`, `/article/:id`
-- `PoliTopicsWeb/backend/src/repositories/dynamoArticleRepository.ts`
-  - DynamoDB クエリと S3 アセットのロード
+### Web API エントリーポイント
+- `PoliTopicsWeb/workers/backend/src/index.ts`
+  - `/headlines`, `/suggest`, `/article/:id`
+- `PoliTopicsWeb/workers/backend/src/repositories/articleRepository.ts`
+  - DynamoDB クエリと R2 アセットのロード（署名付き/公開 URL 経由）
 
 ### フロントエンド検索とレンダリング
 - `PoliTopicsWeb/frontend/app/home-client.tsx` (検索 UI + フィルタ)
 - `PoliTopicsWeb/frontend/app/article/article-client.tsx` (記事詳細)
 - `PoliTopicsWeb/frontend/components/home/search-controls.tsx` (フィルタ UI)
 
-### インフラ (環境変数とLambda配線)
-- Recap Lambda 環境
-  - `PoliTopicsRecap/terraform/service/lambda/main.tf`
+### インフラ (環境変数と Workers 配線)
+- Recap Fargate 環境
+  - `PoliTopicsRecap/terraform/service/fargate/main.tf`
 - DataCollection Lambda 環境
   - `PoliTopicsDataCollection/terraform/service/lambda/main.tf`
-- Web backend Lambda 環境
-  - `PoliTopicsWeb/terraform/service/lambda/main.tf`
-
-## 読み方の例
-
-### 1) "タスクが作成されない"
-- `PoliTopicsDataCollection/src/lambda_handler.ts`
-  - APIキーチェック -> 日付範囲 -> 会議取得 -> タスク作成
-- `PoliTopicsDataCollection/src/lambda/meetings.ts`
-  - 国会会議録 API レスポンス処理
-- `PoliTopicsDataCollection/src/DynamoDB/tasks.ts`
-  - DynamoDB 書き込み
-
-### 2) "タスクが処理されない"
-- `PoliTopicsRecap/src/lambda_handler.ts`
-  - 保留タスククエリ (StatusIndex)
-- `PoliTopicsRecap/src/tasks/taskRepository.ts`
-  - クエリ条件とステータス更新
-
-### 3) "記事が表示されない"
-- `PoliTopicsRecap/src/lambda/taskProcessor.ts`
-  - LLM 結果 -> JSON パース -> `storeData()`
-- `PoliTopicsRecap/src/dynamoDB/storeData.ts`
-  - DynamoDB + S3 永続化
-
-### 4) "検索結果が空になる"
-- `PoliTopicsWeb/backend/src/repositories/dynamoArticleRepository.ts`
-  - `getHeadlines`, `searchArticles`, `getSuggestions`
-- `PoliTopicsWeb/backend/src/repositories/dynamoArticleMapper.ts`
-  - Dynamo アイテム -> API レスポンスマッピング
-
-### 5) "UI レンダリングがおかしい"
-- `PoliTopicsWeb/frontend/app/home-client.tsx`
-- `PoliTopicsWeb/frontend/components/home/articles-sections.tsx`
-- `PoliTopicsWeb/frontend/app/article/article-client.tsx`
+- Web backend Workers 環境
+  - `PoliTopicsWeb/terraform/workers/main.tf`
 
 ## 変更影響のホットスポット
 
@@ -115,5 +81,4 @@
 
 ## リファレンス
 - `docs/jp/system_overview.md`
-- `docs/jp/build.md`
 - `docs/jp/08_db_design.md`

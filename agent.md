@@ -1,5 +1,5 @@
 # Agent Guide — PoliTopics
-[Japanese Version](./jp/agent.md)
+[日本語版](./jp/agent.md)
 
 PoliTopics is a three-part pipeline that turns Japanese National Diet records
 into searchable summaries and a public web experience.

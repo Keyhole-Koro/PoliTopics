@@ -1,5 +1,5 @@
 # 8. DB Design
-[Japanese Version](./jp/08_db_design.md)
+[日本語版](./jp/08_db_design.md)
 
 ## DynamoDB: LLM task table
 Used by DataCollection (write) and Recap (read/update).
@@ -31,7 +31,7 @@ Main item
 - `PK`: `A#<id>`
 - `SK`: `META`
 - `type`: `ARTICLE`
-- `asset_url`: S3 URL for large asset JSON
+- `asset_url`: R2 URL for large asset JSON
 - `GSI1PK`: `ARTICLE`
 - `GSI1SK`: `<ISO date>`
 - `GSI2PK`: `Y#YYYY#M#MM`
@@ -50,7 +50,7 @@ Optional keyword log
 - `SK`: `D#<ISO>#KW#<keyword>#A#<id>`
 - `type`: `KEYWORD_OCCURRENCE`
 
-## S3 usage
+## R2 usage (S3 API)
 - Prompt bucket: DataCollection prompt payloads and Recap result JSON.
 - Article asset bucket: Recap stores `asset.json` containing heavy fields
   (`summary`, `soft_language_summary`, `middle_summary`, `dialogs`).

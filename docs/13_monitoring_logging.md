@@ -1,8 +1,8 @@
 # 13. Monitoring and Logging
-[Japanese Version](./jp/13_monitoring_logging.md)
+[日本語版](./jp/13_monitoring_logging.md)
 
 ## Logs
-- Lambda logs: CloudWatch log groups for each Lambda function.
+- Lambda/Worker logs: CloudWatch log groups for each Lambda function; use them to confirm request inputs and payloads.
 - LocalStack logs: `docker compose logs -f localstack`.
 
 ## Latency Logging
@@ -16,7 +16,7 @@
 
 ## Metrics and alerts
 - No alert rules are defined in Terraform (TBD).
-- Consider adding alarms on Lambda errors, DLQ depth, and DynamoDB throttles.
+- Metrics/alerts should primarily be added for the Web edge/API (future improvement).
 
 ## Discord notifications
 - Webhook URLs live in secrets and are injected as Lambda environment variables via Terraform:
@@ -28,3 +28,7 @@
   - `#batch`: successful task registrations (DataCollection) and article persistence completions (Recap).
   - `#access`: 4xx/5xx access logs emitted by the Web backend after each response.
 - Notifications use a lightweight custom HTTPS sender (no external libraries) to stay Lambda-size friendly and include environment, request/task IDs, and brief context.
+- Error notifications include shortened error messages to keep payload size low.
+
+## Queues
+- No DLQ is configured.

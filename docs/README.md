@@ -39,10 +39,10 @@ Troubleshooting
 - `docs/18_troubleshooting.md`
 
 Submodule docs
-- `PoliTopicsWeb/docs/scripts_and_usage.md`
-- `PoliTopicsRecap/docs/scripts_and_usage.md`
-- `PoliTopicsDataCollection/doc/scripts_and_usage.md`
-- `PoliTopicsNotification/docs/scripts_and_usage.md`
+- `PoliTopicsWeb/README.md`
+- `PoliTopicsRecap/README.md`
+- `PoliTopicsDataCollection/readme.md`
+- `PoliTopicsNotification/readme.md`
 
 Existing docs
 - `docs/system_overview.md`

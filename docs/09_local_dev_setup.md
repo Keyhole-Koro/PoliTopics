@@ -10,6 +10,8 @@
 - Docker + Docker Compose (LocalStack)
 - Terraform
 
+LocalStack tip: `source scripts/export_test_env.sh` to load common local defaults before running tests or dev servers.
+
 ## Local services
 
 - LocalStack endpoint: `http://localhost:4566`

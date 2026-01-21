@@ -39,10 +39,10 @@ APIとデータ
 - `docs/jp/18_troubleshooting.md`
 
 サブモジュール ドキュメント
-- `PoliTopicsWeb/docs/scripts_and_usage.md` (未翻訳)
-- `PoliTopicsRecap/docs/scripts_and_usage.md` (未翻訳)
-- `PoliTopicsDataCollection/doc/scripts_and_usage.md` (未翻訳)
-- `PoliTopicsNotification/docs/scripts_and_usage.md` (未翻訳)
+- `PoliTopicsWeb/README.md` / `PoliTopicsWeb/jp/README.md`
+- `PoliTopicsRecap/README.md` / `PoliTopicsRecap/jp/README.md`
+- `PoliTopicsDataCollection/readme.md` / `PoliTopicsDataCollection/jp/readme.md`
+- `PoliTopicsNotification/readme.md`
 
 既存のドキュメント
 - `docs/jp/system_overview.md`

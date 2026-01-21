@@ -32,7 +32,8 @@ This document summarizes where to start reading, based on your goal.
 ### Prompt shapes and S3 payloads
 - `PoliTopicsDataCollection/src/lambda/taskBuilder.ts` (prompt payload writes)
 - `PoliTopicsRecap/src/lambda/taskProcessor.ts` (prompt/result reads and writes)
-- `PoliTopicsRecap/src/utils/s3.ts` (S3 helpers)
+- `PoliTopicsRecap/src/utils/s3.ts` (S3 helpers for intermediate artifacts)
+- `PoliTopicsRecap/src/utils/r2.ts` (R2 helpers for final article assets)
 
 ### LLM calls and model configuration
 - `PoliTopicsRecap/src/llm/geminiClient.ts` (Gemini API)

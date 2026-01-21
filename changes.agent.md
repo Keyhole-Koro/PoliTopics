@@ -88,3 +88,26 @@ Files:
 - PoliTopicsWeb/cacheCron/jp/README.md
 - PoliTopicsWeb/profile/jp/README.md
 - PoliTopicsWeb/terraform/jp/README.md
+
+## 2026-01-18 14:38 JST - Codex
+Keywords: agent-guide, terraform, policy
+Topic: Clarify Terraform-only provisioning in agent guide
+Details:
+- Allowed Terraform-based IaC changes in this repository and explicitly banned provisioning via CDK/CloudFormation/AWS SDK in application code.
+Files:
+- agent.md
+- jp/agent.md
+- changes.agent.md
+
+## 2026-01-21 18:05:21 JST - Codex
+Keywords: documentation, mermaid, japanese
+Topic: Add Japanese Mermaid diagrams and refresh README
+Details:
+- Added Japanese-language Mermaid sources for DataCollection, Recap, and Web to pair with the existing English diagrams.
+- Highlighted diagram locations and key docs in the English and Japanese README files, with brief pipeline bullets and local dev notes.
+Files:
+- README.md
+- jp/README.md
+- docs/diagrams/jp/datacollection.mmd
+- docs/diagrams/jp/recap.mmd
+- docs/diagrams/jp/web.mmd

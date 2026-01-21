@@ -1,0 +1,36 @@
+---
+config:
+  layout: dagre
+---
+flowchart LR
+ subgraph RP["PoliTopicsRecap / Processing Service"]
+        RecapSchedule["EventBridge (Cron)<br>RecapSchedule"]
+        RecapBatch["AWS Fargate Task (Node.js)<br>RecapBatch"]
+        S1["① Start Batch<br>Trigger Recap Job"]
+        S2["② Fetch Pending Task<br>from TaskTable"]
+        S3["③ Load Transcript<br>from PromptBucket"]
+        S4["④ Summarize via LLM"]
+        S5["⑤ Persist Results"]
+        S6["⑥ Update Task Status as Completed"]
+        AssetBucket[("S3 / Cloudflare R2<br>AssetBucket")]
+        TaskTable[("DynamoDB<br>TaskTable: llm_task_table")]
+        ArticleTable[("DynamoDB<br>ArticleTable: politopics_article_table")]
+        PromptBucket[("S3 Bucket<br>PromptBucket")]
+  end
+    RecapSchedule --> S1
+    S1 --> RecapBatch
+    RecapBatch --> S2 & S3 & S4 & S5 & S6
+    S2 --> TaskTable
+    S3 --> PromptBucket
+    S4 --> GeminiAPI["External<br>GeminiAPI<br>(LLM Summarization)"] & RecapBatch
+    GeminiAPI --> S4
+    S5 --> AssetBucket & ArticleTable
+    S6 --> TaskTable
+
+     S1:::step
+     S2:::step
+     S3:::step
+     S4:::step
+     S5:::step
+     S6:::step
+    classDef step fill:#f9f9f9,stroke:#333,stroke-width:1.5px

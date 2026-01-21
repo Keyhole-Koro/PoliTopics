@@ -1,0 +1,40 @@
+flowchart LR
+  %% ========== Web 配信 (V8 + Hono + Cache Cron) ==========
+  subgraph WEB["PoliTopicsWeb / Web サービス"]
+    WebFrontend["Cloudflare Worker (V8)<br/>Web フロントエンド<br/>ホスト: politopics.net<br/>（R2 から SPA を配信）"]
+    WebBackend["Cloudflare Worker (V8) + Hono<br/>Web バックエンド API<br/>ホスト: api.politopics.net<br/>エンドポイント: /headlines, /suggest"]
+    AssetEdge["Cloudflare (R2 公開アクセス)<br/>アセットホスト: asset.politopics.net"]
+  end
+
+  User["利用者<br/>(ブラウザ)"]
+
+  R2Spa[("Cloudflare R2<br/>SPA アセット<br/>(politopics.net)")]
+  R2Asset[("Cloudflare R2<br/>要約アセット<br/>(asset.politopics.net)")]
+  ArticleTable[("DynamoDB<br/>ArticleTable: politopics_article_table")]
+
+  %% ========== キャッシュ更新 ==========
+  subgraph CRON["キャッシュ更新 (毎日)"]
+    CacheSchedule["EventBridge (Cron)<br/>1日1回"]
+    CacheLambda["AWS Lambda (Node.js)<br/>CacheCronLambda<br/>/headlines を index.html に埋め込み"]
+  end
+
+  %% ---- Page load ----
+  User -->|ページを要求| WebFrontend
+  WebFrontend -->|SPA アセットを配信| R2Spa
+
+  %% ---- API (metadata only) ----
+  User -->|"API をリクエスト<br/>GET /headlines<br/>GET /suggest"| WebBackend
+  WebBackend -->|"記事インデックスを参照<br/>(GSI フィルタ/ソート)"| ArticleTable
+  WebBackend -->|"JSON (メタデータ) を返却:<br/>タイトル、日付...<br/>recapAssetURL"| User
+
+  %% ---- Direct asset download (client-side) ----
+  User -->|要約アセットを直接ダウンロード| AssetEdge
+  AssetEdge -->|アセットオブジェクトを取得| R2Asset
+
+  %% ---- Recap assets content hint ----
+  R2Asset ---|"要約アセットのフィールド:<br/>タイトル、説明、参加者、<br/>キーワード、院名など"| R2Asset
+
+  %% ---- Cache cron flow ----
+  CacheSchedule -->|トリガー| CacheLambda
+  CacheLambda -->|"最新のヘッドラインを取得<br/>(ArticleTable から)"| ArticleTable
+  CacheLambda -->|"更新済み index.html を書き込み<br/>(ヘッドラインを埋め込み)"| R2Spa

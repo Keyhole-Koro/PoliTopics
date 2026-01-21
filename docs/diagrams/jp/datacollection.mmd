@@ -1,0 +1,15 @@
+flowchart LR
+  %% ========== データ収集 ==========
+  subgraph DC["PoliTopicsDataCollection / 収集サービス"]
+    IngestSchedule["EventBridge (Cron)<br/>取得スケジュール"]
+    IngestLambda["AWS Lambda (Node.js)<br/>IngestLambda"]
+    PromptBucket[(S3 バケット<br/>PromptBucket)]
+    TaskTable[(DynamoDB<br/>TaskTable: llm_task_table)]
+  end
+
+  NationalDietAPI["外部<br/>国会議事録API<br/>(National Diet API)"]
+
+  IngestSchedule -->|トリガー| IngestLambda
+  IngestLambda -->|会議録を取得| NationalDietAPI
+  IngestLambda -->|元テキストを保存| PromptBucket
+  IngestLambda -->|タスクを登録| TaskTable

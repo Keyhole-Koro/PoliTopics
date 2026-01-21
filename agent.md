@@ -18,8 +18,8 @@ defined in this document.
 | `PoliTopicsRecap/`          | LLM recap + article persistence | Processes tasks, generates summaries, stores articles in DynamoDB + S3                |
 | `PoliTopicsWeb/`            | Web app + API                   | Next.js SPA + Fastify API backed by DynamoDB and S3                                   |
 
-Infrastructure provisioning is managed **exclusively with Terraform** and is
-**out of scope** for this repository.
+Infrastructure provisioning is managed **exclusively with Terraform** in this
+repository. Application code must not provision infrastructure directly.
 
 ## LocalStack Endpoint (MUST)
 
@@ -50,11 +50,11 @@ Rules:
 
 ---
 
-### 2. Do NOT include infrastructure provisioning code
+### 2. Infrastructure provisioning must use Terraform only
 
-- No Terraform, CDK, CloudFormation, or AWS SDK-based resource creation.
-- This repository contains **application code only**.
-- Infrastructure is defined and applied separately via Terraform.
+- Terraform is the only allowed infrastructure provisioning mechanism.
+- Do NOT provision infrastructure via CDK, CloudFormation, or AWS SDK calls in application code.
+- Keep infrastructure changes isolated under `terraform/` and related IaC docs.
 
 ---
 
@@ -264,7 +264,7 @@ Create a new entry if:
 - Centralize new config in `config.ts`
 - Use LocalStack for AWS interactions
 - Log meaningful errors with sufficient context
-- Avoid adding infrastructure or provisioning code
+- Keep infrastructure changes in Terraform; avoid provisioning via application code
 
 ### After implementation
 

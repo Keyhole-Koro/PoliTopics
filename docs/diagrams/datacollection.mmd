@@ -1,0 +1,15 @@
+flowchart LR
+  %% ========== Data Collection ==========
+  subgraph DC[PoliTopicsDataCollection / Ingestion Service]
+    IngestSchedule["EventBridge (Cron)<br/>IngestSchedule"]
+    IngestLambda["AWS Lambda (Node.js)<br/>IngestLambda"]
+    PromptBucket[(S3 Bucket<br/>PromptBucket)]
+    TaskTable[(DynamoDB<br/>TaskTable: llm_task_table)]
+  end
+
+  NationalDietAPI["External<br/>NationalDietAPI<br/>(国会議事録API)"]
+
+  IngestSchedule -->|Triggers| IngestLambda
+  IngestLambda -->|Fetches Data| NationalDietAPI
+  IngestLambda -->|Stores Raw Text| PromptBucket
+  IngestLambda -->|Enqueues Task| TaskTable

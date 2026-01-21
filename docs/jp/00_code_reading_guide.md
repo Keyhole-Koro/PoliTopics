@@ -32,7 +32,8 @@
 ### プロンプト形状とS3ペイロード
 - `PoliTopicsDataCollection/src/lambda/taskBuilder.ts` (プロンプトペイロードの書き込み)
 - `PoliTopicsRecap/src/lambda/taskProcessor.ts` (プロンプト/結果の読み書き)
-- `PoliTopicsRecap/src/utils/s3.ts` (S3 ヘルパー)
+- `PoliTopicsRecap/src/utils/s3.ts` (S3 ヘルパー: 中間成果物用)
+- `PoliTopicsRecap/src/utils/r2.ts` (R2 ヘルパー: 最終成果物用)
 
 ### LLM呼び出しとモデル設定
 - `PoliTopicsRecap/src/llm/geminiClient.ts` (Gemini API)

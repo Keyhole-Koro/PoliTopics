@@ -1,0 +1,40 @@
+flowchart LR
+  %% ========== Web Serving (Updated v8 + Hono + Cache Cron) ==========
+  subgraph WEB["PoliTopicsWeb / Web Service"]
+    WebFrontend["Cloudflare Worker (V8)<br/>WebFrontend<br/>Host: politopics.net<br/>(serves SPA from R2)"]
+    WebBackend["Cloudflare Worker (V8) + Hono<br/>WebBackend API<br/>Host: api.politopics.net<br/>Endpoints: /headlines, /suggest"]
+    AssetEdge["Cloudflare (R2 public access)<br/>Asset Host: asset.politopics.net"]
+  end
+
+  User["User<br/>(Browser)"]
+
+  R2Spa[("Cloudflare R2<br/>SPA assets<br/>(politopics.net)")]
+  R2Asset[("Cloudflare R2<br/>Recap Assets<br/>(asset.politopics.net)")]
+  ArticleTable[("DynamoDB<br/>ArticleTable: politopics_article_table")]
+
+  %% ========== Cache Cron ==========
+  subgraph CRON["Cache Cron (Daily)"]
+    CacheSchedule["EventBridge (Cron)<br/>1/day"]
+    CacheLambda["AWS Lambda (Node.js)<br/>CacheCronLambda<br/>Embeds /headlines into index.html"]
+  end
+
+  %% ---- Page load ----
+  User -->|Requests Page| WebFrontend
+  WebFrontend -->|Serves SPA assets| R2Spa
+
+  %% ---- API (metadata only) ----
+  User -->|"Requests API<br/>GET /headlines<br/>GET /suggest"| WebBackend
+  WebBackend -->|"Reads article index<br/>(GSI filter/sort)"| ArticleTable
+  WebBackend -->|"Returns JSON (metadata):<br/>title, date, ...<br/>recapAssetURL"| User
+
+  %% ---- Direct asset download (client-side) ----
+  User -->|Downloads recap assets directly| AssetEdge
+  AssetEdge -->|Fetch asset objects| R2Asset
+
+  %% ---- Recap assets content hint ----
+  R2Asset ---|"Recap asset fields:<br/>title, description, participants, <br/>keywords, nameOfHouse, etc..."| R2Asset
+
+  %% ---- Cache cron flow ----
+  CacheSchedule -->|Triggers| CacheLambda
+  CacheLambda -->|"Reads latest headlines<br/>(from ArticleTable)"| ArticleTable
+  CacheLambda -->|"Writes updated index.html<br/>(headlines embedded)"| R2Spa

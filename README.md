@@ -1,7 +1,12 @@
 # PoliTopics Monorepo
 [Japanese Version](./jp/README.md)
 
-PoliTopics is a three-part pipeline that turns Japanese National Diet records into searchable summaries and a public web experience.
+PoliTopics turns Japanese National Diet records into searchable summaries and a public web experience.
+- Collects minutes, slices them into prompt-sized chunks, and registers LLM tasks
+- Generates readable recaps plus assets, then stores metadata in DynamoDB
+- Serves a SPA + API backed by DynamoDB/R2 with cached headlines
+
+## Modules
 
 | Directory                   | Component                       | Summary                                                                               |
 | --------------------------- | ------------------------------- | ------------------------------------------------------------------------------------- |
@@ -9,16 +14,22 @@ PoliTopics is a three-part pipeline that turns Japanese National Diet records in
 | `PoliTopicsRecap/`          | LLM recap + article persistence | Processes tasks, generates summaries, stores articles in DynamoDB + S3                |
 | `PoliTopicsWeb/`            | Web app + API                   | Next.js SPA + Fastify API backed by DynamoDB and S3                                   |
 
-## Docs
+## Architecture & Diagrams
+- Mermaid sources (EN): `docs/diagrams/datacollection.mmd`, `docs/diagrams/recap.mmd`, `docs/diagrams/web.mmd`
+- Mermaid sources (JP): `docs/diagrams/jp/datacollection.mmd`, `docs/diagrams/jp/recap.mmd`, `docs/diagrams/jp/web.mmd`
+- System design overviews: `docs/05_system_diagram.md`, `docs/06_architecture.md`
+- LocalStack endpoint: `http://localstack:4566` (see `docker-compose.yml` for the local stack)
 
-- Docs index: `docs/README.md`
-- Code reading guide: `docs/00_code_reading_guide.md`
-- System overview: `docs/system_overview.md`
-- Build & local environment guide: `docs/build.md`
+## Documentation
+- Index: `docs/README.md` (JP: `docs/jp/README.md`)
+- Quick starts: `docs/09_local_dev_setup.md`, `docs/build.md`
+- APIs/data: `docs/07_api_spec.md`, `docs/08_db_design.md`
+- Operations: `docs/12_deploy.md`, `docs/13_monitoring_logging.md`
 
-## Repo Structure
-
-The root repo stitches the three submodules together so they can share a unified Dev Container, LocalStack instance, and documentation while remaining deployable on their own.
+## Working Locally
+- Dev Container + Docker Compose provide LocalStack and DynamoDB admin; see `docs/09_local_dev_setup.md` for bootstrap commands.
+- Builds must target `local`, `stage`, or `prod` explicitly; wire env selection into your scripts.
+- Tests use Jest across services; run the relevant suite when changing behavior.
 
 ```
 .
@@ -68,5 +79,4 @@ The root repo stitches the three submodules together so they can share a unified
 - Stage/Prod: Terraform no longer uploads the SPA. Deploy via GitHub Actions workflow `.github/workflows/deploy-frontend.yml`, which builds the frontend with `NEXT_PUBLIC_API_BASE_URL` from `terraform output backend_api_url` and syncs to Cloudflare R2 (set the R2 secrets in the repo before running).
 
 ## Agent Guide
-
 See `agent.md` for AI agent rules, LocalStack requirements, and change log expectations.

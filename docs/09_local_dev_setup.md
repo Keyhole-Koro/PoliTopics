@@ -35,6 +35,11 @@ Recap
 - `APP_ENVIRONMENT` (local|stage|prod)
 - `GEMINI_API_KEY`
 - `DISCORD_WEBHOOK_ERROR` / `DISCORD_WEBHOOK_WARN` / `DISCORD_WEBHOOK_BATCH`
+- `R2_ENDPOINT_URL` (S3 API endpoint for R2)
+- `R2_REGION` (Default: auto)
+- `R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY` (R2 Credentials)
+- `R2_ARTICLE_BUCKET` (Bucket name)
+- `R2_PUBLIC_URL_BASE` (Public domain for assets, e.g., https://asset.politopics.net)
 
 Web frontend
 - `NEXT_PUBLIC_APP_ENV` (local|stage|prod)

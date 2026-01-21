@@ -1,0 +1,36 @@
+---
+config:
+  layout: dagre
+---
+flowchart LR
+  subgraph RP["PoliTopicsRecap / 要約サービス"]
+        RecapSchedule["EventBridge (Cron)<br>要約スケジュール"]
+        RecapBatch["AWS Fargate タスク (Node.js)<br>RecapBatch"]
+        S1["① バッチ開始<br>要約ジョブを起動"]
+        S2["② 未処理タスクを取得<br>TaskTable から読む"]
+        S3["③ 会議録を取得<br>PromptBucket から読む"]
+        S4["④ LLM で要約生成"]
+        S5["⑤ 結果を永続化"]
+        S6["⑥ タスクを完了に更新"]
+        AssetBucket[("S3 / Cloudflare R2<br>AssetBucket")]
+        TaskTable[("DynamoDB<br>TaskTable: llm_task_table")]
+        ArticleTable[("DynamoDB<br>ArticleTable: politopics_article_table")]
+        PromptBucket[("S3 バケット<br>PromptBucket")]
+  end
+    RecapSchedule --> S1
+    S1 --> RecapBatch
+    RecapBatch --> S2 & S3 & S4 & S5 & S6
+    S2 --> TaskTable
+    S3 --> PromptBucket
+    S4 --> GeminiAPI["外部<br>GeminiAPI<br>(LLM 要約)"] & RecapBatch
+    GeminiAPI --> S4
+    S5 --> AssetBucket & ArticleTable
+    S6 --> TaskTable
+
+     S1:::step
+     S2:::step
+     S3:::step
+     S4:::step
+     S5:::step
+     S6:::step
+    classDef step fill:#f9f9f9,stroke:#333,stroke-width:1.5px

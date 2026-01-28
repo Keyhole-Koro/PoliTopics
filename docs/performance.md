@@ -11,17 +11,17 @@ Latency measurements for backend APIs running on **AWS Lambda** and **Cloudflare
 
 Measured by invoking the function after a period of inactivity.
 
-| Endpoint     | Avg (ms) | p50 (ms) | p95 (ms) | Max (ms) |
-| ------------ | -------: | -------: | -------: | -------: |
-| `/headlines` |  6228.89 |  6285.55 |  6314.38 |  6314.38 |
-| `/article`   |  6432.02 |  6319.97 |  6702.59 |  6702.59 |
-| `/suggest`   |  4985.03 |  5809.22 |  6133.70 |  6133.70 |
+| Endpoint     | Avg (ms) | p95 (ms) |
+| ------------ | -------: | -------: |
+| `/headlines` |  6228.89 |  6314.38 |
+| `/article`   |  6432.02 |  6702.59 |
+| `/suggest`   |  4985.03 |  6133.70 |
 
 > Cloudflare Workers do not exhibit measurable cold start latency due to their isolate-based execution model.
 
 ---
 
-## Steady-State Latency (Average / p95)
+## Warm Start Latency (Average / p95)
 
 ### `/headlines`
 
@@ -52,13 +52,13 @@ Measured by invoking the function after a period of inactivity.
 
 ## Overall Comparison
 
-### Cold Start vs Steady State (Avg)
+### Cold Start vs Warm Start (Avg)
 
-| Endpoint     | Lambda Cold Start | Lambda Steady | Workers Steady |
-| ------------ | ----------------: | ------------: | -------------: |
-| `/headlines` |            ~6.2 s |      454.6 ms |  **234.79 ms** |
-| `/article`   |            ~6.4 s |     763.87 ms |  **377.91 ms** |
-| `/suggest`   |            ~5.0 s |     296.75 ms |   **85.88 ms** |
+| Endpoint     | Lambda Cold Start | Lambda Warm Start | Workers Warm Start |
+| ------------ | ----------------: | ----------------: | -----------------: |
+| `/headlines` |        6228.89 ms |          454.6 ms |      **234.79 ms** |
+| `/article`   |        6432.02 ms |         763.87 ms |      **377.91 ms** |
+| `/suggest`   |        4985.03 ms |         296.75 ms |       **85.88 ms** |
 
 ---
 

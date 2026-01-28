@@ -2,7 +2,7 @@
 
 Latency measurements for backend APIs running on **AWS Lambda** and **Cloudflare Workers**.
 
-> **Measurement script:** `profile/measure-backend-latency.js`  
+> **Measurement script:** `PoliTopicsWeb/bench/measure-backend-latency.js`  
 > This script repeatedly calls each backend endpoint and records latency statistics (min / avg / p50 / p95 / p99).
 
 ---

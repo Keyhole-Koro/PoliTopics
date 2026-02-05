@@ -39,10 +39,10 @@
 ### LLM タスクテーブル (DynamoDB)
 - 使用者: DataCollection (書き込み), Recap (読み取り/更新)
 - テーブル定義:
-  - PK: `pk` (文字列, issueID)
+  - PK: `pk` (文字列, `session + house + issueID` をハッシュ化した内部UID)
   - GSI: `StatusIndex` (`status` + `createdAt`)
 - 主要属性 (IssueTask / TaskItem):
-  - `pk`: issueID
+  - `pk`: 内部UID（`session + house + issueID` のハッシュ）
   - `status`: `pending` | `completed`
   - `llm`: 例: `gemini`
   - `llmModel`: モデル名
@@ -80,10 +80,6 @@
     - `SK`: `Y#<YYYY>#M#<MM>#D#<ISO-UTC>#A#<id>`
     - `type`: `THIN_INDEX`
     - カードレンダリング用メタデータを保持: タイトル, 日付, imageKind, 説明, カテゴリ, キーワード, 参加者。
-  - オプション: 最近のキーワードログ
-    - `PK`: `KEYWORD_RECENT`
-    - `SK`: `D#<ISO-UTC>#KW#<keyword>#A#<id>`
-    - `type`: `KEYWORD_OCCURRENCE`
 
 ## ノート: ストレージ
 - プロンプトとリデュース出力: Amazon S3 (DataCollection + Recap)。

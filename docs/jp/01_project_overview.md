@@ -15,7 +15,8 @@ PoliTopics は、人間による恣意的な操作を挟まず、日本の国会
 ## 用語集（ドメイン用語）
 - 国会 API (National Diet API): 会議録を取得するために使用される外部 API (国会会議録検索システム)。
 - 会議 (Meeting): 国会会議録 (issueID、院、日付、発言)。
-- Issue ID: 会議録の一意の識別子 (タスクの PK として使用)。
+- Issue ID: 国会会議録 API の会議ID（グローバル一意ではない。会議メタデータとして保持）。
+- Internal Task ID: `(session + house + issueID)` から導出する内部UID（DynamoDBタスクPK）。
 - LLM タスク (LLM task): 会議の要約ジョブを表す DynamoDB レコード。
 - チャンク (Chunk): チャンク要約のために長い会議プロンプトを分割したもの。
 - リデュースプロンプト (Reduce prompt): チャンクの結果を組み合わせて記事にする最終プロンプト。

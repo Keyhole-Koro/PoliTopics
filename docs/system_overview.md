@@ -39,10 +39,10 @@
 ### LLM Task Table (DynamoDB)
 - Used by: DataCollection (write), Recap (read/update)
 - Table definition:
-  - PK: `pk` (string, issueID)
+  - PK: `pk` (string, internal task UID: hash of `session + house + issueID`)
   - GSI: `StatusIndex` (`status` + `createdAt`)
 - Main attributes (IssueTask / TaskItem):
-  - `pk`: issueID
+  - `pk`: internal task UID (hash of `session + house + issueID`)
   - `status`: `pending` | `completed`
   - `llm`: e.g. `gemini`
   - `llmModel`: model name
@@ -80,10 +80,6 @@
     - `SK`: `Y#<YYYY>#M#<MM>#D#<ISO-UTC>#A#<id>`
     - `type`: `THIN_INDEX`
     - Holds metadata for card rendering: title, date, imageKind, description, categories, keywords, participants.
-  - Optional: recent keyword log
-    - `PK`: `KEYWORD_RECENT`
-    - `SK`: `D#<ISO-UTC>#KW#<keyword>#A#<id>`
-    - `type`: `KEYWORD_OCCURRENCE`
 
 ## Notes: Storage
 - Prompts and reduce outputs: Amazon S3 (DataCollection + Recap).

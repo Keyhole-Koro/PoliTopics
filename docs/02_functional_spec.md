@@ -11,8 +11,10 @@
 ### PoliTopicsRecap
 - Poll DynamoDB for pending tasks.
 - Run LLM summarization on single-chunk or chunked tasks.
+- For chunked tasks, include per-chunk order coverage (`chunks[].based_on_orders`) and pass it to reduce input to improve reconstruction/validation.
 - Store reduce results in S3 (prompt/result) and heavy article assets in R2.
 - Persist article metadata to DynamoDB and heavy assets to R2.
+- Generate dialog summaries as concise bullet lists; when longer, group with fixed section labels (主張/説明/質問/回答/根拠/影響/次の対応) and optionally provide `summary_sections` / `soft_language_sections` arrays (title + bullets) for structured UI rendering. Avoid duplicating content between summary, sections, and QA. Keep soft-language paraphrases short.
 - Send notifications via Discord for errors, warnings, and completions.
 
 ### PoliTopicsWeb
@@ -32,6 +34,7 @@
 - Fetches article details from `/article/:id`.
 - Shows summary, simplified summary, dialog list, participants, keywords, and terms.
 - Summaries are rendered as Markdown (GFM) to support rich text formatting (lists, links).
+- Summary text may include `[[orders:1,2,3]]` directives to jump/highlight matching dialog entries.
 
 ### Not found
 - Any unknown route shows a simple not-found view with a link back to home.
@@ -60,6 +63,7 @@
   - `pk`, `llm`, `llmModel`, `prompt_url`, `result_url` are required.
   - `meeting` fields must be present and valid.
   - Chunked tasks must include chunk definitions with S3 URLs for prompts/results.
+  - `chunks[].based_on_orders` is optional but recommended; when missing, Recap falls back to parsing chunk output or URL patterns.
 - DataCollection validates date range format as `YYYY-MM-DD`.
 
 ## Access behavior

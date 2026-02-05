@@ -54,11 +54,11 @@ Measured by invoking the function after a period of inactivity.
 
 ### Cold Start vs Warm Start (Avg)
 
-| Endpoint     | Lambda Cold Start | Lambda Warm Start | Workers Warm Start |
-| ------------ | ----------------: | ----------------: | -----------------: |
-| `/headlines` |        6228.89 ms |          454.6 ms |      **234.79 ms** |
-| `/article`   |        6432.02 ms |         763.87 ms |      **377.91 ms** |
-| `/suggest`   |        4985.03 ms |         296.75 ms |       **85.88 ms** |
+| Endpoint     | Lambda Cold Start | Lambda Warm Start |       Workers |
+| ------------ | ----------------: | ----------------: | ------------: |
+| `/headlines` |        6228.89 ms |          454.6 ms | **234.79 ms** |
+| `/article`   |        6432.02 ms |         763.87 ms | **377.91 ms** |
+| `/suggest`   |        4985.03 ms |         296.75 ms |  **85.88 ms** |
 
 ---
 

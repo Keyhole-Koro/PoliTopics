@@ -15,7 +15,8 @@ PoliTopics turns Japanese National Diet records into searchable summaries and a 
 ## Glossary (domain terms)
 - National Diet API: External API used to fetch meeting records (Kokkai/National Diet API).
 - Meeting: A Diet session meeting record (issueID, house, date, speeches).
-- Issue ID: Unique identifier for a meeting record (used as task PK).
+- Issue ID: Meeting ID from the National Diet API (not globally unique; stored as meeting metadata).
+- Internal Task ID: Canonical UID derived from `(session + house + issueID)` and used as the DynamoDB task PK.
 - LLM task: A DynamoDB record representing a summarization job for a meeting.
 - Chunk: A split of a long meeting prompt used for chunked summarization.
 - Reduce prompt: The final prompt that combines chunk results into an article.
